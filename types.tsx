@@ -9,14 +9,23 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
+  Home: undefined;
+  Search: undefined;
+  Notifications: undefined;
+  Messages: undefined;
   TabOne: undefined;
   TabTwo: undefined;
 };
 
-export type TabOneParamList = {
-  TabOneScreen: undefined;
+export type HomeNavigatorParamList = {
+  HomeScreen: undefined;
 };
 
-export type TabTwoParamList = {
-  TabTwoScreen: undefined;
+export type ProfilePictureProps = {
+  image: string,
+  size?: number,
+};
+
+export type MessagesNavigatorParamList = {
+  MessagesScreen: undefined;
 };
