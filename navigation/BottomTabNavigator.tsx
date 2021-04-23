@@ -35,7 +35,7 @@ export default function BottomTabNavigator() {
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
         // Afficher le label d'une icone
-        //showLabel: true,
+        showLabel: false,
       }}
       screenOptions={{}}
     >

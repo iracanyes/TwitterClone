@@ -13,8 +13,6 @@ export type BottomTabParamList = {
   Search: undefined;
   Notifications: undefined;
   Messages: undefined;
-  TabOne: undefined;
-  TabTwo: undefined;
 };
 
 export type HomeNavigatorParamList = {
@@ -28,4 +26,34 @@ export type ProfilePictureProps = {
 
 export type MessagesNavigatorParamList = {
   MessagesScreen: undefined;
+};
+
+export type TweetProps = {
+  tweet: TweetType;
+};
+
+export type LeftContainerProps = {
+  user: UserType
+};
+
+export type MainContainerProps = {
+  tweet: TweetType
+};
+
+export type TweetType = {
+  id: string;
+  user: UserType;
+  createdAt: string;
+  content: String;
+  image?: string;
+  numberOfComments: number;
+  numberOfRetweets: number;
+  numberOfLikes: number;
+};
+
+export type UserType = {
+  id: string;
+  username: string;
+  name: string;
+  image: string;
 };
