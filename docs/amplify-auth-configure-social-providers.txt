@@ -1,0 +1,25 @@
+Hosted UI Endpoint:
+********************
+https://twittercloneb55c1114-b55c1114-dev.auth.eu-west-1.amazoncognito.com/
+
+
+Test Your Hosted UI Endpoint: 
+*******************************
+https://twittercloneb55c1114-b55c1114-dev.auth.eu-west-1.amazoncognito.com/login?response_type=code&client_id=1ng39sh349gqqlq398d1728n
+qm&redirect_uri=https://localhost:19000/
+
+
+Configuration Social Providers
+====================================
+1. Update auth librairies
+$ amplify update auth
+2. Configure redirect URI (your local network ip 192.168.x.x)
+Redirect URI : exp://192.168.x.x:19000/
+
+3. Configure social providers
+3.1. Create a project on Facebook for developpers
+	https://developers.facebook.com/
+	After the creation, copy the App ID and App Secret Key
+
+3.2. 
+ 

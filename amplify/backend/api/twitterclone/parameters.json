@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "twitterclone",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authtwittercloneb55c1114",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

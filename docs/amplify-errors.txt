@@ -1,0 +1,12 @@
+Error 400: redirect uri mismatch
+**************************************
+
+The redirect URI in the request :
+https://twittercloneb55c1114-b55c1114-dev.auth.eu-west-1.amazoncognito.com/oauth2/idpresponse
+
+does not match the ones authorized for the OAauth client. T
+
+Solution
+*********
+Set this URI in the setting of the google OAauth key authorized redirect URI
+https://twittercloneb55c1114-b55c1114-dev.auth.eu-west-1.amazoncognito.com/oauth2/idpresponse

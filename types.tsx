@@ -5,6 +5,7 @@
 
 export type RootStackParamList = {
   Root: undefined;
+  NewTweet: undefined;
   NotFound: undefined;
 };
 
@@ -17,6 +18,10 @@ export type BottomTabParamList = {
 
 export type HomeNavigatorParamList = {
   HomeScreen: undefined;
+};
+
+export type NewTweetNavigatorParamList = {
+  NewTweetScreen: undefined;
 };
 
 export type ProfilePictureProps = {

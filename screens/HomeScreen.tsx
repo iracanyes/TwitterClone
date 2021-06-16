@@ -1,15 +1,17 @@
 import * as React from 'react';
 import {
-  FlatList,
   StyleSheet,
   SafeAreaView
 } from 'react-native';
+
 import Feed from "../components/Feed";
+import NewTweetButton from "../components/NewTweetButton";
 
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Feed />
+      <NewTweetButton />
     </SafeAreaView>
   );
 }
