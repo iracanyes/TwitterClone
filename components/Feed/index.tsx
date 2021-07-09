@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   View,
@@ -6,12 +6,34 @@ import {
 } from "react-native";
 import tweets from "../../data/tweets";
 import Tweet from "../Tweet";
+import { API, Auth, graphqlOperation } from "aws-amplify";
+import { listTweets } from "../../graphql/queries";
 
 export type FeedProps = {
 
 };
 
 const Feed = (props: FeedProps) => {
+  const [ tweets , setTweets] = useState(null);
+
+  useEffect(() => {
+    const getTweets = async () => {
+      try{
+        const response = await API.graphql(graphqlOperation(listTweets));
+        console.log("Feed useEffect getTweets response",response);
+        if(response.data.listTweets !== undefined){
+          setTweets(response.data.listTweets.items);
+        }
+      }catch (e) {
+        console.warn("Feed useEffect getTweets error", e);
+      }
+
+
+    };
+
+    getTweets();
+  }, []);
+
   return (
     <View style={styles.container}>
       <FlatList

@@ -1,4 +1,8 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { Auth, API, graphqlOperation } from "aws-amplify";
+import { getUser } from "../graphql/queries";
+import { createTweet } from '../graphql/mutations';
 import {
   View,
   Text,
@@ -13,22 +17,58 @@ import ProfilePicture from "../components/ProfilePicture";
 import { Picker } from "@react-native-picker/picker";
 
 const NewTweetScreen = () => {
-
+  const navigation = useNavigation();
+  const [ user, setUser] = useState(null);
   const [ tweet, setTweet ] = useState("");
   const [ imageUrl, setImageUrl ] = useState("");
   const [ privacy, setPrivacy ] = useState('everyone');
 
-  const onPostTweet = () => {};
+  useEffect(() => {
+    const getAuthenticatedUser = async () => {
+      const cognitoUser = await Auth.currentAuthenticatedUser();
+      const response = await API.graphql(graphqlOperation(getUser, { id: cognitoUser.attributes.sub }));
+      if(response.data.getUser !== undefined ){
+        setUser(response.data.getUser);
+      }else{
+        navigation.navigate('Login');
+      }
+    };
+
+    getAuthenticatedUser();
+  }, []);
+
+  const onPostTweet = async () => {
+    const message = {
+      userID: user.id,
+      content: tweet,
+      image: imageUrl,
+    };
+
+    try{
+      const response = await API.graphql(graphqlOperation(createTweet, {input: message }));
+      console.log('onPostTweet createTweet', response);
+      navigation.goBack();
+    }catch(e){
+      console.warn("onPostTweet createTweet error", e);
+    }
+
+
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <AntDesign
-          name={'close'}
-          size={30}
-          color={Colors.light.tint}
-        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Root', { screen: 'Home'})}
+        >
+          <AntDesign
+            name={'close'}
+            size={30}
+            color={Colors.light.tint}
+          />
+        </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.button}
           onPress={onPostTweet}
@@ -40,7 +80,7 @@ const NewTweetScreen = () => {
       <View style={styles.mainContainer}>
         <View style={styles.imageContainer}>
           <ProfilePicture
-            image={"https://www.fillmurray.com/640/360"}
+            image={user ? user.image : "https://www.fillmurray.com/640/360"}
           />
         </View>
         <View style={styles.inputsContainer}>
@@ -100,7 +140,7 @@ const NewTweetScreen = () => {
         </View>
       </View>
 
-    </SafeAreaView>
+    </View>
   );
 };
 

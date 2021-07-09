@@ -7,7 +7,6 @@ import {Fontisto, Ionicons, MaterialCommunityIcons} from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import {
@@ -23,6 +22,8 @@ import {
 } from '../types';
 import ProfilePicture from "../components/ProfilePicture";
 import {View} from "react-native";
+import {API, Auth, graphqlOperation} from "aws-amplify";
+import { getUser } from "../graphql/queries";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -83,6 +84,33 @@ const HomeStack = createStackNavigator<HomeNavigatorParamList>();
 
 // Define HomeScreeen Navigation stack
 function HomeNavigator() {
+  const [user, setUser  ] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      try{
+        // Get current cognito user
+        const cognitoUser = await Auth.currentAuthenticatedUser();
+        console.log("BottomTabNavigator HomeNavigator useEffect - currentAuthenticatedUser", cognitoUser);
+        // Get User info in DB
+        if(cognitoUser){
+          const response = await API.graphql(graphqlOperation(getUser, { id: cognitoUser.attributes.sub }));
+          console.log("BottomTabNavigator HomeNavigator useEffect getUser",response);
+          if(response.data.getUser){
+            setUser(response.data.getUser);
+          }
+        }else{
+          return;
+        }
+      }catch(e){
+        console.warn("BottomTabNavigator HomeNavigator GetUser Error", e);
+      }
+
+    };
+
+    fetchUser();
+
+  }, []);
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -110,10 +138,11 @@ function HomeNavigator() {
             marginRight: 15
           },
           headerLeft: () => (
-            <ProfilePicture image={"https://www.fillmurray.com/640/360"} size={40}/>
+            <ProfilePicture image={user !== null ? user.image : "http://placeimg.com/640/360/any" } size={50}/>
           ),
           headerLeftContainerStyle: {
-            marginLeft: 15
+            marginLeft: 10,
+            paddingBottom: 10
           },
 
         }}

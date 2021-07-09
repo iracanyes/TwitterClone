@@ -1,16 +1,24 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+  },
+  containerBackgroundImage: {
+    flex: 1,
+    height: Dimensions.get('window').height,
+    paddingTop: 10,
+    resizeMode: "cover",
     alignItems: 'center',
-    marginTop: 25
+    justifyContent: 'center'
   },
   mainContainer: {
     width: 300,
-    height: 500,
+    //height: 450,
     //backgroundColor: "#217CD8",
   },
   title: {
@@ -39,6 +47,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginVertical: 10,
+    backgroundColor: '#fff',
     padding: 10,
     borderWidth: 1,
     borderRadius: 15,
@@ -53,12 +62,37 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   inputContainer: {
-    position: 'relative'
+    position: 'relative',
+    width: 300,
+    height: 50,
+    backgroundColor: '#fff',
+    marginVertical: 10,
+    borderWidth: 1,
+    borderRadius: 15,
+    borderColor: '#999',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  inputEmail: {},
+  inputPassword: {
+    position: 'absolute',
+    width: 250,
+    bottom: -10,
+    left: 0,
+    zIndex: 1,
+    borderLeftWidth: 0
   },
   inputRightIcon: {
     position: 'absolute',
-    right: 15,
-    bottom: 22
+    right: 12,
+    bottom: 12,
+    zIndex: 2,
   },
   inlineButtonContainer: {
     flexDirection: 'row',
@@ -102,6 +136,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: "center",
+  },
+  confirmButton: {
+    backgroundColor: '#C0422C'
   },
   buttonAmazon: {
     borderColor: "#FF9900",

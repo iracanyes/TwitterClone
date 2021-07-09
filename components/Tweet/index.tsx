@@ -14,6 +14,7 @@ import styles from "./styles";
 
 const Tweet = ({ tweet }: TweetProps) => {
   //const { tweet } = props;
+  console.log("Tweet", tweet);
   return (
     <SafeAreaView style={styles.container}>
       {/* LeftContainer */}

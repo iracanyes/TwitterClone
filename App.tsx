@@ -7,7 +7,7 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 // AWS Amplify Auth
 // @ts-ignore
-import Amplify, { Auth, Hub } from "aws-amplify";
+import Amplify, {Auth, API, Hub, graphqlOperation} from "aws-amplify";
 import awsconfig from './aws-exports';
 import { withOAuth } from "aws-amplify-react-native";
 import {
@@ -18,7 +18,8 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Entypo, AntDesign, Fontisto } from "@expo/vector-icons";
-import Login from "./components/Login";
+// react-native-root-toast wrapper
+import {RootSiblingParent} from "react-native-root-siblings";
 
 Amplify.configure(awsconfig);
 
@@ -28,29 +29,26 @@ function App(props: AppProps) {
   const {
     oAuthUser,
     oAuthError,
-    hostedUISignIn,
-    facebookSignIn,
-    googleSignIn,
-    amazonSignIn,
-
   } = props;
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   const [ user, setUser ] = useState(null);
 
-  const getUser = () => {
-    return Auth.currentAuthenticatedUser()
-      .then( (userData) => userData)
-      .catch( (error) => console.error('Not Sign in: ', error))
+  const getUser = async () => {
+    return await Auth.currentAuthenticatedUser({bypassCache: true});
   };
 
   useEffect(() => {
     Hub.listen('auth', ({ payload: { event, data }}) => {
-      console.log("Auth data", data);
-      console.log("Auth event", event);
+
       switch(event){
         case 'signIn':
-          getUser().then( (userData) => setUser(userData));
+          const user = getUser();
+          console.log("App Hub listen - Auth event", event);
+          console.log("App Hub listen - Auth data", data);
+          console.log("App Hub listen - oAuthUser", oAuthUser);
+          console.log("App Hub listen - currentAuthenticatedUser", user);
+          setUser(data);
           break;
         case 'signOut':
           setUser(null);
@@ -66,7 +64,7 @@ function App(props: AppProps) {
       }
     });
 
-    getUser().then(userData => setUser(userData));
+    getUser().then((userData) => setUser(userData)).catch(e => console.log("CurrentAuthenticatedUser error!", e));
   });
 
 
@@ -74,22 +72,18 @@ function App(props: AppProps) {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        {user
-          ? (
-            <SafeAreaView style={styles.container}>
-              <Navigation colorScheme={colorScheme} />
-              <StatusBar />
-            </SafeAreaView>
-          )
-          : (
-            <SafeAreaView style={styles.container}>
-              <Login user={user} setUser={setUser}/>
-            </SafeAreaView>
-          )
-        }
 
+      <SafeAreaProvider>
+        {/*user ?? console.log('App return User', user)*/}
+        <SafeAreaView style={styles.container}>
+          <RootSiblingParent>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </RootSiblingParent>
+        </SafeAreaView>
       </SafeAreaProvider>
+
+
     );
   }
 }

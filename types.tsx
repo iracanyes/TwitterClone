@@ -4,7 +4,11 @@
  */
 
 export type RootStackParamList = {
+  Login: undefined;
+  Subscribe: undefined;
+  ConfirmSignUp: undefined;
   Root: undefined;
+  Profile: undefined;
   NewTweet: undefined;
   NotFound: undefined;
 };
@@ -18,6 +22,11 @@ export type BottomTabParamList = {
 
 export type HomeNavigatorParamList = {
   HomeScreen: undefined;
+};
+
+export type ProfileBottomTabParamList = {
+  Profile: undefined;
+  UpdateProfile: undefined;
 };
 
 export type NewTweetNavigatorParamList = {
@@ -60,5 +69,15 @@ export type UserType = {
   id: string;
   username: string;
   name: string;
+  email: string;
   image: string;
 };
+
+export type UserInputProps = {
+  id: string;
+  username: string;
+  name: string;
+  email: string;
+  image: string;
+};
+

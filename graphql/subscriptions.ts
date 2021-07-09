@@ -9,6 +9,7 @@ export const onCreateUser = /* GraphQL */ `
       username
       name
       email
+      accountType
       status
       image
       tweets {
@@ -46,6 +47,7 @@ export const onUpdateUser = /* GraphQL */ `
       username
       name
       email
+      accountType
       status
       image
       tweets {
@@ -83,6 +85,7 @@ export const onDeleteUser = /* GraphQL */ `
       username
       name
       email
+      accountType
       status
       image
       tweets {
@@ -125,6 +128,7 @@ export const onCreateTweet = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -163,6 +167,7 @@ export const onUpdateTweet = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -201,6 +206,7 @@ export const onDeleteTweet = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -240,6 +246,7 @@ export const onCreateFleet = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -269,6 +276,7 @@ export const onUpdateFleet = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -298,6 +306,7 @@ export const onDeleteFleet = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -325,6 +334,7 @@ export const onCreateLike = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -346,6 +356,7 @@ export const onCreateLike = /* GraphQL */ `
           username
           name
           email
+          accountType
           status
           image
           createdAt
@@ -373,6 +384,7 @@ export const onUpdateLike = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -394,6 +406,7 @@ export const onUpdateLike = /* GraphQL */ `
           username
           name
           email
+          accountType
           status
           image
           createdAt
@@ -421,6 +434,7 @@ export const onDeleteLike = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -442,6 +456,7 @@ export const onDeleteLike = /* GraphQL */ `
           username
           name
           email
+          accountType
           status
           image
           createdAt

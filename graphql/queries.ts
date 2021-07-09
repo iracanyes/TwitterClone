@@ -9,6 +9,7 @@ export const getUser = /* GraphQL */ `
       username
       name
       email
+      accountType
       status
       image
       tweets {
@@ -51,6 +52,7 @@ export const listUsers = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -78,6 +80,7 @@ export const getTweet = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -121,6 +124,7 @@ export const listTweets = /* GraphQL */ `
           username
           name
           email
+          accountType
           status
           image
           createdAt
@@ -149,6 +153,7 @@ export const getFleet = /* GraphQL */ `
         username
         name
         email
+        accountType
         status
         image
         tweets {
@@ -183,6 +188,7 @@ export const listFleets = /* GraphQL */ `
           username
           name
           email
+          accountType
           status
           image
           createdAt

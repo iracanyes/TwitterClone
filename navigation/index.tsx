@@ -7,12 +7,17 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import {ColorSchemeName, TouchableOpacity, View, Text} from 'react-native';
-
-import NotFoundScreen from '../screens/NotFoundScreen';
+import {
+  LoginScreen,
+  SubscribeScreen,
+  ConfirmSignUpScreen,
+  NotFoundScreen,
+  NewTweetScreen
+}  from "../screens";
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
-import NewTweetScreen from "../screens/NewTweetScreen";
+import ProfileBottomTabNavigator from "./ProfileBottomTabNavigator";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -31,11 +36,16 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator
+      initialRouteName={"Login"}
       screenOptions={{
         headerShown: false,
       }}
     >
+      <Stack.Screen name={"Login"} component={LoginScreen} />
+      <Stack.Screen name={"Subscribe"} component={SubscribeScreen} />
+      <Stack.Screen name={"ConfirmSignUp"} component={ConfirmSignUpScreen}/>
       <Stack.Screen name="Root" component={BottomTabNavigator} />
+      <Stack.Screen name="Profile" component={ProfileBottomTabNavigator} />
       <Stack.Screen
         name={"NewTweet"}
         component={NewTweetScreen}

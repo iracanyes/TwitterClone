@@ -16,7 +16,7 @@ type NewsItemProps = {
 }
 
 const NewsItem = (props: NewsItemProps) => {
-  const { title, imageUrl, content} = props;
+  const { title, imageUrl, content } = props;
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
