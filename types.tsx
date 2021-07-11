@@ -37,6 +37,7 @@ export type NewTweetNavigatorParamList = {
 export type ProfilePictureProps = {
   image: string,
   size?: number,
+  styles?: object
 };
 
 export type MessagesNavigatorParamList = {
@@ -77,10 +78,10 @@ export type LikeType = {
 
 export type UserType = {
   id: string;
-  username: string;
-  name: string;
-  email: string;
-  image: string;
+  username?: string;
+  name?: string;
+  email?: string;
+  image?: string;
 };
 
 export type UserInputProps = {
@@ -91,3 +92,8 @@ export type UserInputProps = {
   image: string;
 };
 
+export type UserFleetPreviewProps = {
+  user: UserType
+};
+
+export type UserFleetListProps = {};
