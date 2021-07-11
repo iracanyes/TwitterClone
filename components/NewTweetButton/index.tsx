@@ -36,13 +36,21 @@ const styles = StyleSheet.create({
   button:{
     backgroundColor: Colors.light.tint,
     position: "absolute",
-    bottom: 50,
-    right: 50,
+    bottom: 40,
+    right: 35,
     width: 60,
     height: 60,
     borderRadius: 50,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.84,
+    elevation: 5
   },
   icon: {
     color: Colors.light.background,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -17,10 +17,13 @@ import {
 } from '@expo/vector-icons';
 import styles from "./styles";
 import FooterContainer from "./FooterContainer";
+import { Storage } from "aws-amplify";
+import { S3Image } from "aws-amplify-react-native";
 
 
 const MainContainer = (props: MainContainerProps) => {
   const { tweet } = props;
+
   return (
     <SafeAreaView style={styles.container}>
       {/* username */}
@@ -36,8 +39,8 @@ const MainContainer = (props: MainContainerProps) => {
       {/* content */}
       <View style={styles.content}>
         <Text>{ tweet.content }</Text>
-        {!!tweet.image
-          && <Image source={{uri: tweet.image}} style={styles.tweetImage}/>
+        {tweet.image
+          && <S3Image imgKey={ tweet.image } style={styles.tweetImage}/>
         }
       </View>
       {/* social links */}

@@ -33,6 +33,7 @@ type User
 type Tweet
 @model
 @key(name: "byUser", fields: ["userID"])
+@key(name: "byDate", fields: ["createdAt"], queryField: "tweetsByDate")
 {
   id: ID!
   content: String!
@@ -40,6 +41,7 @@ type Tweet
   userID: ID!
   user: User @connection(fields: ["userID"])
   likes: [Like] @connection(keyName: "byTweet", fields: ["id"])
+  createdAt: String!
 }
 
 type Fleet
@@ -55,7 +57,9 @@ type Fleet
 }
 
 type Like
+# Disable queries as it's not needed. Likes while be queried with their tweets
 @model(queries: null)
+# 2 keys for the many-to-many relations between User and Tweet.
 @key(name: "byUser", fields: ["userID","tweetID"])
 @key(name: "byTweet", fields: ["tweetID", "userID"])
 {

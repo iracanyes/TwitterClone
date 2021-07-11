@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Auth, API, graphqlOperation } from "aws-amplify";
+import { Auth, API, Storage, graphqlOperation } from "aws-amplify";
 import { getUser } from "../graphql/queries";
 import { createTweet } from '../graphql/mutations';
 import {
+  Image,
   View,
   Text,
   TextInput,
@@ -15,6 +16,10 @@ import {AntDesign, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import ProfilePicture from "../components/ProfilePicture";
 import { Picker } from "@react-native-picker/picker";
+import * as ImagePicker from "expo-image-picker";
+import 'react-native-get-random-values';
+import { v4 as uuidv4} from 'uuid';
+
 
 const NewTweetScreen = () => {
   const navigation = useNavigation();
@@ -22,6 +27,7 @@ const NewTweetScreen = () => {
   const [ tweet, setTweet ] = useState("");
   const [ imageUrl, setImageUrl ] = useState("");
   const [ privacy, setPrivacy ] = useState('everyone');
+  const [ mediaSelected, setMediaSelected ] = useState(null);
 
   useEffect(() => {
     const getAuthenticatedUser = async () => {
@@ -37,11 +43,62 @@ const NewTweetScreen = () => {
     getAuthenticatedUser();
   }, []);
 
+  const openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if(permissionResult.granted === false){
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1
+    });
+
+    console.log("ImagePicker result", pickerResult);
+    setMediaSelected({ localUri: pickerResult.uri });
+
+  };
+
+  const uploadFile = async () => {
+    try{
+      if(mediaSelected.localUri !== undefined){
+        const response = await fetch(mediaSelected.localUri);
+        const blob = await response.blob();
+
+        const urlParts = mediaSelected.localUri.split('.');
+        const fileExtension = urlParts[urlParts.length - 1];
+        console.log("uploadFile fileExtension", fileExtension);
+
+        const filename= `${uuidv4()}.${fileExtension}`;
+
+        const storageResponse = await Storage.put(
+          // random unique name for the file in S3 (filename.ext)
+          filename,
+          blob
+        );
+
+
+        return storageResponse.key;
+      }
+
+
+    }catch (e) {
+      console.log('File upload error', e);
+    }
+  };
+
   const onPostTweet = async () => {
+    const imageURI = await uploadFile();
+    console.log('onPostTweet uploadFile imageURI', imageURI);
+
     const message = {
       userID: user.id,
       content: tweet,
-      image: imageUrl,
+      image: imageURI,
     };
 
     try{
@@ -95,11 +152,26 @@ const NewTweetScreen = () => {
             onChangeText={setTweet}
 
           />
-          <TextInput
+          {/*
+            <TextInput
             style={styles.imageInput}
             placeholder={'Image URL optional'}
             value={imageUrl}
             onChangeText={setImageUrl}
+          />
+          */}
+          <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => openImagePickerAsync()}
+          >
+            <Text style={styles.buttonText}>
+              {"Ajouter une image/vidéo"}
+            </Text>
+          </TouchableOpacity>
+          <Image
+            source={{ uri:  mediaSelected !== null ? mediaSelected.localUri : 'https://i.imgur.com/TkIrScD.png' }}
+            style={styles.imagePreview}
           />
         </View>
       </View>
@@ -198,6 +270,13 @@ const styles = StyleSheet.create({
   },
   imageInput: {
     width: '100%',
+    padding: 10,
+    backgroundColor: 'yellow',
+  },
+  imagePreview: {
+    width: '100%',
+    height: 200,
+    marginTop: 10,
     padding: 10,
     backgroundColor: 'yellow',
   },

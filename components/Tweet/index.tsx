@@ -16,12 +16,12 @@ const Tweet = ({ tweet }: TweetProps) => {
   //const { tweet } = props;
   console.log("Tweet", tweet);
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* LeftContainer */}
       <LeftContainer user={ tweet.user } />
       {/* MainContainer */}
       <MainContainer tweet={ tweet } />
-    </SafeAreaView>
+    </View>
   );
 };
 

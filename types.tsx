@@ -2,6 +2,7 @@
  * Learn more about using TypeScript with React Navigation:
  * https://reactnavigation.org/docs/typescript/
  */
+import {User} from "./API";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -60,9 +61,18 @@ export type TweetType = {
   createdAt: string;
   content: String;
   image?: string;
+  likes: { items: [LikeType]};
   numberOfComments: number;
   numberOfRetweets: number;
   numberOfLikes: number;
+};
+
+export type LikeType = {
+  id: string;
+  userID?: string;
+  tweetID?: string;
+  user?: UserType;
+  tweet?: TweetType;
 };
 
 export type UserType = {

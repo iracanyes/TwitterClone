@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
     lineHeight: 20
   },
   tweetImage:{
-    width: '100%',
+    width: 250,
     height: 200,
     borderRadius: 15,
-    resizeMode: 'cover',
-    overflow: 'hidden',
+    //resizeMode: 'cover',
+    //overflow: 'hidden',
     marginVertical: 5
   },
 
