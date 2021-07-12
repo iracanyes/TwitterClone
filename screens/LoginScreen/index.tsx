@@ -46,11 +46,9 @@ const LoginScreen = (props: LoginProps) => {
   useEffect(() => {
     const getAuthenticatedUser = async () => {
       const cognitoUser = await Auth.currentAuthenticatedUser({ bypassCache: true});
-      console.log('LoginScreen useEffect getAuthenticatedUser', user);
 
       if(cognitoUser.attributes !== undefined){
         const response = await API.graphql(graphqlOperation(getUser, {id : cognitoUser.attributes.sub }));
-        console.log('LoginScreen useEffect getUserInDB', response);
 
         if(response.data.getUser !== undefined){
           // Create User if he doesn't exist in DB
@@ -103,7 +101,6 @@ const LoginScreen = (props: LoginProps) => {
   const getUserInDb = async (user: any) => {
     try{
       const response = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub}));
-      console.log("getUserInDb - response", response);
       //@ts-ignore
       return response.data.getUser !== undefined ? response.data.getUser :  null;
     }catch(e){

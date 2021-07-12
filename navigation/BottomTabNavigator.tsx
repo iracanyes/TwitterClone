@@ -91,11 +91,11 @@ function HomeNavigator() {
       try{
         // Get current cognito user
         const cognitoUser = await Auth.currentAuthenticatedUser();
-        console.log("BottomTabNavigator HomeNavigator useEffect - currentAuthenticatedUser", cognitoUser);
+
         // Get User info in DB
         if(cognitoUser){
           const response = await API.graphql(graphqlOperation(getUser, { id: cognitoUser.attributes.sub }));
-          console.log("BottomTabNavigator HomeNavigator useEffect getUser",response);
+
           if(response.data.getUser){
             setUser(response.data.getUser);
           }

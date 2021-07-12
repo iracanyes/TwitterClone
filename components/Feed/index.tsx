@@ -8,6 +8,7 @@ import tweets from "../../data/tweets";
 import Tweet from "../Tweet";
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { listTweets } from "../../graphql/queries";
+import UserFleetsList from "../UserFleetsList";
 
 export type FeedProps = {
 
@@ -21,7 +22,7 @@ const Feed = (props: FeedProps) => {
     setLoading(true);
     try{
       const response = await API.graphql(graphqlOperation(listTweets));
-      console.log("Feed useEffect getTweets response",response);
+
       if(response.data.listTweets !== undefined){
         setTweets(response.data.listTweets.items);
       }
@@ -51,6 +52,7 @@ const Feed = (props: FeedProps) => {
         refreshing={loading}
         // Refresh method
         onRefresh={fetchTweets}
+        ListHeaderComponent={<UserFleetsList />}
       />
     </View>
   );
@@ -58,10 +60,7 @@ const Feed = (props: FeedProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

@@ -13,8 +13,7 @@ import styles from "./styles";
 
 
 const Tweet = ({ tweet }: TweetProps) => {
-  //const { tweet } = props;
-  console.log("Tweet", tweet);
+
   return (
     <View style={styles.container}>
       {/* LeftContainer */}

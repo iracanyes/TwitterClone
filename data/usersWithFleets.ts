@@ -1,4 +1,4 @@
-export default [
+export const usersWithFleets = [
   {
     "id": "0",
     "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/10.png",
