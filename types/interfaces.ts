@@ -22,6 +22,7 @@ export interface IFleet {
 export interface IFleetViewProps {
   user: IUser|null;
   fleet: IFleet;
+  progress: number;
   goToNextFleet: Function;
   goToPrevFleet: Function;
 }

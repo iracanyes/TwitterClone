@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.light.background,
   },
+  progressBar: {
+    position: 'absolute',
+    top: 100,
+    right: 10,
+    zIndex: 5
+  },
   image: {
     flex: 1,
     resizeMode: 'cover',

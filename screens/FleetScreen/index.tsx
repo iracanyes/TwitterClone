@@ -22,10 +22,31 @@ const FleetScreen = () => {
 
   const [ fleetIndex, setFleetIndex ] = useState(0);
   const [ fleet, setFleet ] = useState(user ? user.fleets.items[fleetIndex] : null);
+  const [ progress, setProgress ] = useState(0);
+
+  // Effet de bord pour la bar de progression, Timer
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if(progress < 8){
+        setProgress(progress + 1);
+      }else{
+        // Reset timer
+        setProgress(0);
+        nextFleet();
+        return;
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [progress]);
 
 
   const nextFleet = () => {
     console.warn('next Fleet pressed!');
+    // Reset timer
+    setProgress(0);
     if(fleetIndex !== user.fleets.items.length - 1){
       //if fleetIndex isn't for the last one,  go to next fleet index
       setFleetIndex(fleetIndex + 1);
@@ -42,6 +63,8 @@ const FleetScreen = () => {
 
   const previousFleet = () => {
     console.warn('prev Fleet pressed!');
+    // Reset timer
+    setProgress(0);
     if(fleetIndex !== 0){
       setFleetIndex(fleetIndex - 1);
     }else{
@@ -52,25 +75,6 @@ const FleetScreen = () => {
       }
     }
   };
-
-
-  {/* Actif au chargement de la page
-  useEffect(() => {
-    const fetchUsersWithFleets = async () => {
-      //console.log('FleetScreen useEffect route', route);
-      const res = await API.graphql(graphqlOperation(listUsersWithFleets));
-
-      if(res.data.listUsers !== undefined){
-        console.log('FleetScreen useEffect res.data.listUsers', res.data.listUsers);
-        const usersWithFleets = res.data.listUsers.items.filter(el => el.fleets.items.length > 0);
-        console.log('FleetScreen useEffect usersWithFleets', usersWithFleets);
-        setUsersWithFleets(usersWithFleets);
-      }
-    };
-
-    fetchUsersWithFleets();
-  }, []);
-  */}
 
   // Effet de bord actif à chaque modification de la valeur "fleetIndex"
   useEffect(() => {
@@ -95,6 +99,7 @@ const FleetScreen = () => {
         (<FleetView
           user={user}
           fleet={fleet}
+          progress={progress}
           goToNextFleet={nextFleet}
           goToPrevFleet={previousFleet}
         />)

@@ -11,12 +11,12 @@ import {IFleetViewProps} from "../../types/interfaces";
 import { S3Image } from "aws-amplify-react-native";
 import ProfilePicture from "../ProfilePicture";
 import { DateTime } from "luxon";
+import * as Progress from "react-native-progress";
 
 const FleetView = (props: IFleetViewProps) => {
-  const { user, fleet, goToPrevFleet, goToNextFleet } = props;
+  const { user, fleet, progress, goToPrevFleet, goToNextFleet } = props;
   const navigation = useNavigation();
-  console.log('FleetView user', user);
-  console.log('FleetView fleet', fleet);
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -51,6 +51,14 @@ const FleetView = (props: IFleetViewProps) => {
           )}
 
         </View>
+        {/* Progress bar */}
+        <Progress.Circle
+          progress={(8 - progress) / 8}
+          size={50}
+          showsText={true}
+          formatText={() => (8 - progress) + 'sec'}
+          style={styles.progressBar}
+        />
         {fleet.type === "Text"
           ? (
             <Text style={styles.text}>
