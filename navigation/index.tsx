@@ -18,6 +18,7 @@ import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import ProfileBottomTabNavigator from "./ProfileBottomTabNavigator";
+import FleetScreen from "../screens/FleetScreen";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -45,6 +46,7 @@ function RootNavigator() {
       <Stack.Screen name={"Subscribe"} component={SubscribeScreen} />
       <Stack.Screen name={"ConfirmSignUp"} component={ConfirmSignUpScreen}/>
       <Stack.Screen name="Root" component={BottomTabNavigator} />
+      <Stack.Screen name="Fleet" component={FleetScreen} />
       <Stack.Screen name="Profile" component={ProfileBottomTabNavigator} />
       <Stack.Screen
         name={"NewTweet"}

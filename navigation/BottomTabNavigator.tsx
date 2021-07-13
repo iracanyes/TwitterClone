@@ -6,6 +6,7 @@
 import {Fontisto, Ionicons, MaterialCommunityIcons} from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from "@react-navigation/native";
 import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -18,12 +19,13 @@ import {
 import {
   BottomTabParamList,
   HomeNavigatorParamList,
-  MessagesNavigatorParamList
+  MessagesNavigatorParamList, UserType
 } from '../types';
 import ProfilePicture from "../components/ProfilePicture";
 import {View} from "react-native";
 import {API, Auth, graphqlOperation} from "aws-amplify";
 import { getUser } from "../graphql/queries";
+import {IUser} from "../types/interfaces";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -84,7 +86,8 @@ const HomeStack = createStackNavigator<HomeNavigatorParamList>();
 
 // Define HomeScreeen Navigation stack
 function HomeNavigator() {
-  const [user, setUser  ] = React.useState(null);
+  const [user, setUser  ] = React.useState<IUser|any>(null);
+  const navigation = useNavigation();
 
   React.useEffect(() => {
     const fetchUser = async () => {
@@ -96,7 +99,9 @@ function HomeNavigator() {
         if(cognitoUser){
           const response = await API.graphql(graphqlOperation(getUser, { id: cognitoUser.attributes.sub }));
 
+          // @ts-ignore
           if(response.data.getUser){
+            // @ts-ignore
             setUser(response.data.getUser);
           }
         }else{
@@ -137,9 +142,16 @@ function HomeNavigator() {
           headerRightContainerStyle: {
             marginRight: 15
           },
-          headerLeft: () => (
-            <ProfilePicture image={user !== null ? user.image : "http://placeimg.com/640/360/any" } size={50}/>
-          ),
+          headerLeft: () => {
+            //const { image } = user;
+            return (
+              <ProfilePicture
+                image={user !== null ? user.image : "http://placeimg.com/640/360/any" }
+                size={50}
+                onPress={() => navigation.navigate('Profile', {screen: 'Profile'})}
+              />
+            )
+          },
           headerLeftContainerStyle: {
             marginLeft: 10,
             paddingBottom: 10

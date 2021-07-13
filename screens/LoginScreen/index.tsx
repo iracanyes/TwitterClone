@@ -65,7 +65,7 @@ const LoginScreen = (props: LoginProps) => {
             await persistUser(user);
 
           }else{
-            console.log("user already exists in DB");
+            showToast("user already exists in DB");
           }
           navigation.navigate('Root', {screen: 'Home'});
         }
@@ -121,7 +121,7 @@ const LoginScreen = (props: LoginProps) => {
     try{
       // authentification Cognito
       const cognitoUser = await Auth.signIn(email, password);
-      console.log('Auth signIn - user', cognitoUser);
+
 
 
       // Vérifie si l'utilisateur existe en db sinon on le crée
@@ -142,7 +142,7 @@ const LoginScreen = (props: LoginProps) => {
           await persistUser(userInput);
 
         }else{
-          console.log("user already exists in DB");
+          showToast("user already exists in DB");
         }
 
         // Redirection vers la page d'accueil

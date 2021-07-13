@@ -8,21 +8,23 @@ import styles from "./styles";
 import { API, graphqlOperation } from "aws-amplify";
 import { listFleets } from "../../graphql/queries";
 import UserFleetPreview from "../UserFleetPreview";
-import {UserFleetListProps, UserType} from "../../types";
-import{ usersWithFleets as myUsersWithFleets } from "../../data/usersWithFleets";
+import {UserFleetListProps} from "../../types";
 import { listUsersWithFleets } from "../../graphql/custom-queries";
+import {IUser} from "../../types/interfaces";
 
 const UserFleetsList = (props: UserFleetListProps) => {
-  const [ usersWithFleets, setUsersWithFleets ] = useState(null);
+  const [ usersWithFleets, setUsersWithFleets ] = useState<IUser[]|null>(null);
 
   useEffect(() => {
     const fetchUserFleets = async () => {
 
       const res = await API.graphql(graphqlOperation(listUsersWithFleets));
       console.log('fetchUserFleets res', res);
+      //@ts-ignore
       if(res.data !== undefined){
         console.log('res.data.listFleets', res.data.listUsers);
-        const usersWithFleets = res.data.listUsers.items.filter((item) => item.fleets.items.length > 0);
+        //@ts-ignore
+        const usersWithFleets = res.data.listUsers.items.filter((item: IUser) => item.fleets.items.length > 0);
         setUsersWithFleets(usersWithFleets);
       }
     };
@@ -37,7 +39,9 @@ const UserFleetsList = (props: UserFleetListProps) => {
       <FlatList
         horizontal
         data={usersWithFleets}
-        renderItem={(item) => <UserFleetPreview user={item.item}/>}
+        renderItem={(item) => (
+          <UserFleetPreview user={item.item} usersWithFleets={usersWithFleets}/>
+        )}
         keyExtractor={item => item.id}
         style={styles.flatlist}
         showsHorizontalScrollIndicator={false}

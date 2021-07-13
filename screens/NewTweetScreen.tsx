@@ -58,7 +58,7 @@ const NewTweetScreen = () => {
       quality: 1
     });
 
-    console.log("ImagePicker result", pickerResult);
+
     setMediaSelected({ localUri: pickerResult.uri });
 
   };
@@ -71,7 +71,7 @@ const NewTweetScreen = () => {
 
         const urlParts = mediaSelected.localUri.split('.');
         const fileExtension = urlParts[urlParts.length - 1];
-        console.log("uploadFile fileExtension", fileExtension);
+
 
         const filename= `${uuidv4()}.${fileExtension}`;
 
@@ -87,13 +87,12 @@ const NewTweetScreen = () => {
 
 
     }catch (e) {
-      console.log('File upload error', e);
+      console.warn('File upload error', e);
     }
   };
 
   const onPostTweet = async () => {
     const imageURI = await uploadFile();
-    console.log('onPostTweet uploadFile imageURI', imageURI);
 
     const message = {
       userID: user.id,
@@ -103,7 +102,7 @@ const NewTweetScreen = () => {
 
     try{
       const response = await API.graphql(graphqlOperation(createTweet, {input: message }));
-      console.log('onPostTweet createTweet', response);
+
       navigation.goBack();
     }catch(e){
       console.warn("onPostTweet createTweet error", e);

@@ -20,7 +20,7 @@ const UpdateProfileScreen = () => {
           setUser(user);
         }
       }catch (e){
-        console.log("NewMemberScreen useEffect - User not found", e);
+        console.warn("NewMemberScreen useEffect - User not found", e);
       }
 
     }
@@ -32,7 +32,7 @@ const UpdateProfileScreen = () => {
     try{
       await API.graphql(graphqlOperation(updateUser, { input: user }));
     }catch (e) {
-      console.log("", e);
+      console.warn("Persist user error", e);
     }
 
   }

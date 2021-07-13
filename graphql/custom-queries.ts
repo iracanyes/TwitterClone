@@ -32,3 +32,30 @@ export const listUsersWithFleets = /* GraphQL */ `
     }
   }
 `;
+export const getUserWithFleets = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      username
+      name
+      email
+      accountType
+      status
+      image
+      fleets {
+        items {
+          id
+          type
+          text
+          image
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

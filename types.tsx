@@ -3,11 +3,13 @@
  * https://reactnavigation.org/docs/typescript/
  */
 import {User} from "./API";
+import {IUser} from "./types/interfaces";
 
 export type RootStackParamList = {
   Login: undefined;
   Subscribe: undefined;
   ConfirmSignUp: undefined;
+  Fleet: undefined;
   Root: undefined;
   Profile: undefined;
   NewTweet: undefined;
@@ -40,7 +42,8 @@ export type ProfilePictureProps = {
   styles?: {
     profileButton?: object,
     profileImage?: object
-  }
+  },
+  onPress: () => void
 };
 
 export type MessagesNavigatorParamList = {
@@ -84,7 +87,7 @@ export type UserType = {
   username?: string;
   name?: string;
   email?: string;
-  image?: string;
+  image: string;
   fleets?: {
     items: [FleetType];
   }
@@ -106,7 +109,8 @@ export type UserInputProps = {
 };
 
 export type UserFleetPreviewProps = {
-  user: UserType
+  user: IUser,
+  usersWithFleets: IUser[]|null;
 };
 
 export type UserFleetListProps = {};

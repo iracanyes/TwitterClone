@@ -56,7 +56,7 @@ const ConfirmSignUpScreen = (props: ConfirmSubscribeProps) => {
 
   const getUserInDb = async (user: any) => {
     const response = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub}));
-    console.log("getUserInDb - response", response);
+
     //@ts-ignore
     return response.data.getUser ?? null;
   }
@@ -68,9 +68,9 @@ const ConfirmSignUpScreen = (props: ConfirmSubscribeProps) => {
   const resendVerificationCode = async () => {
     try{
       await Auth.resendSignUp(username);
-      console.log('code resent successfully');
+
     }catch (e) {
-      console.log('error resending code: ', e);
+      console.warn('error resending code: ', e);
     }
   }
 
@@ -83,7 +83,7 @@ const ConfirmSignUpScreen = (props: ConfirmSubscribeProps) => {
     try{
       // On se connecte
       const confirmSignUpResponse = await Auth.confirmSignUp(username, verificationCode);
-      console.log('Auth confirmSignUp - response', confirmSignUpResponse);
+
 
 
       // Vérifie si l'utilisateur existe en db sinon on le crée

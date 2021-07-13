@@ -82,10 +82,7 @@ const SubscribeScreen = (props: SubscribeProps) => {
     try{
       // inscription Cognito
       const signUpResponse = await signUpRequest;
-      console.log('Auth signUp - user', signUpResponse);
-      console.log('Auth signUp - user', signUpResponse.userSub !== undefined);
-      //const cognitoUser = await Auth.currentAuthenticatedUser();
-      //console.log('Auth signUp - cognitoUser', cognitoUser);
+
 
       // Vérifie si l'utilisateur existe en db sinon on le crée
       if(signUpResponse.userSub !== undefined){
