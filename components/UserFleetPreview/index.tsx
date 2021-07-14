@@ -12,7 +12,7 @@ import ProfilePicture from "../ProfilePicture";
 import {UserFleetPreviewProps} from "../../types";
 
 const UserFleetPreview = (props: UserFleetPreviewProps) => {
-  const { user, usersWithFleets  } = props;
+  const { index, user, usersWithFleets  } = props;
   const navigation = useNavigation();
 
   return (
@@ -20,19 +20,32 @@ const UserFleetPreview = (props: UserFleetPreviewProps) => {
       <ProfilePicture
         image={ props.user.image }
         size={60} styles={styles}
-        onPress={() => navigation.navigate(
-          'Fleet',
-          {
-            userID: user.id,
-            usersWithFleets
+        onPress={() => {
+          if(index === 0){
+            navigation.navigate('NewFleet', { userID: user.id });
+          }else{
+            navigation.navigate(
+              'Fleet',
+              {
+                userID: user.id,
+                usersWithFleets
+              }
+            )
           }
-        )}
+        }}
       />
-      {/*
-        <Text style={styles.username}>
-          { user.username.length > 8 ? user.username.slice(0,7) + '...' : user.username }
-        </Text>
-      */}
+      {index === 0
+        ? (
+          <Text style={styles.username}>
+            {"Add"}
+          </Text>
+        )
+        : (
+          <Text style={styles.username}>
+            { user.fleets.items.length }
+          </Text>
+        )
+      }
 
     </View>
   );

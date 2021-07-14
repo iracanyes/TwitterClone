@@ -42,6 +42,6 @@ const ProfilePicture = ({ image, size = 50, styles, onPress}: ProfilePictureProp
     </TouchableOpacity>
 
   );
-}
+};
 
 export default ProfilePicture;

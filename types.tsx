@@ -13,6 +13,7 @@ export type RootStackParamList = {
   Root: undefined;
   Profile: undefined;
   NewTweet: undefined;
+  NewFleet: undefined;
   NotFound: undefined;
 };
 
@@ -109,6 +110,7 @@ export type UserInputProps = {
 };
 
 export type UserFleetPreviewProps = {
+  index: number;
   user: IUser,
   usersWithFleets: IUser[]|null;
 };

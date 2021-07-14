@@ -19,6 +19,7 @@ import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import ProfileBottomTabNavigator from "./ProfileBottomTabNavigator";
 import FleetScreen from "../screens/FleetScreen";
+import NewFleetScreen from "../screens/NewFleetScreen";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -51,6 +52,10 @@ function RootNavigator() {
       <Stack.Screen
         name={"NewTweet"}
         component={NewTweetScreen}
+      />
+      <Stack.Screen
+        name={'NewFleet'}
+        component={NewFleetScreen}
       />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
 

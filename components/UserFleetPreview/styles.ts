@@ -21,13 +21,20 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.tint,
   },
   username: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
     fontSize: 14,
     fontWeight: 'bold',
     color: "grey",
     //marginTop: 5,
-    padding: 5,
+    paddingHorizontal: 5,
     textAlign: 'center',
-    backgroundColor: '#F6F6F6',
+    backgroundColor: Colors.light.background,
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: "#33CCFF"
+
   }
 });
 

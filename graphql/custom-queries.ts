@@ -22,6 +22,7 @@ export const listUsersWithFleets = /* GraphQL */ `
             type
             text
             image
+            createdAt
           }
           nextToken
         }
