@@ -8,7 +8,7 @@ import Navigation from './navigation';
 // AWS Amplify Auth
 // @ts-ignore
 import Amplify, {Auth, API, Hub, graphqlOperation} from "aws-amplify";
-import awsconfig from './aws-exports';
+import awsconfig from './src/aws-exports';
 import { withOAuth } from "aws-amplify-react-native";
 import {
   View,
@@ -39,30 +39,36 @@ function App(props: AppProps) {
   };
 
   useEffect(() => {
-    Hub.listen('auth', ({ payload: { event, data }}) => {
+    try{
+      Hub.listen('auth', ({ payload: { event, data }}) => {
 
-      switch(event){
-        case 'signIn':
-          const user = getUser();
-          console.log("App Hub listen - Auth event", event);
-          console.log("App Hub listen - Auth data", data);
-          console.log("App Hub listen - oAuthUser", oAuthUser);
-          console.log("App Hub listen - currentAuthenticatedUser", user);
-          setUser(data);
-          break;
-        case 'signOut':
-          setUser(null);
-          break;
-        case 'signIn_failure':
-          console.error('OAuth Sign in failure', oAuthError);
-          console.error('Sign in failure', data);
-          break;
-        case 'cognitoHostedUI_failure':
-          console.error('OAuth Sign in failure', oAuthError);
-          console.error('Sign in failure', data);
-          break;
-      }
-    });
+        switch(event){
+          case 'signIn':
+          case 'cognitoHostedUI':
+            const user = getUser();
+            console.log("App Hub listen - Auth event", event);
+            console.log("App Hub listen - Auth data", data);
+            console.log("App Hub listen - oAuthUser", oAuthUser);
+            console.log("App Hub listen - currentAuthenticatedUser", user);
+            setUser(data);
+            break;
+          case 'signOut':
+            setUser(null);
+            break;
+          case 'signIn_failure':
+            console.error('OAuth Sign in failure', oAuthError);
+            console.error('Sign in failure', data);
+            break;
+          case 'cognitoHostedUI_failure':
+            console.error('OAuth Sign in failure', oAuthError);
+            console.error('Sign in failure', data);
+            break;
+        }
+      });
+    }catch (e) {
+      console.error("App Hub.listen error", e);
+    }
+
 
     getUser().then((userData) => setUser(userData)).catch(e => console.log("CurrentAuthenticatedUser error!", e));
   });
@@ -94,4 +100,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withOAuth(App);
+export default App;

@@ -1,0 +1,243 @@
+{
+    "Items": [
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "image": {
+                "S": "9715469d-37cf-4d7c-aeed-305ced75038e.jpg"
+            },
+            "userID": {
+                "S": "042c9b2e-0417-4dd7-8a52-9bc49c6e5781"
+            },
+            "updatedAt": {
+                "S": "2021-07-11T12:33:52.431Z"
+            },
+            "createdAt": {
+                "S": "2021-07-11T12:33:52.431Z"
+            },
+            "id": {
+                "S": "e69d7e6a-7bd7-4575-8913-10fdbaabcdf0"
+            },
+            "type": {
+                "S": "Image"
+            }
+        },
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "image": {
+                "S": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/UNVERIFIED-192.168.1.53-TwitterClone/ImagePicker/635d18fc-1804-41a7-8a4c-0f73e55febaa.jpg"
+            },
+            "userID": {
+                "S": "571764d0-972c-42df-9654-52cfbf69141e"
+            },
+            "updatedAt": {
+                "S": "2021-07-14T03:03:46.309Z"
+            },
+            "createdAt": {
+                "S": "2021-07-14T03:03:46.309Z"
+            },
+            "text": {
+                "NULL": true
+            },
+            "id": {
+                "S": "cefc783b-f46c-48e6-91e7-286d8f584a1d"
+            },
+            "type": {
+                "S": "Image"
+            }
+        },
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "userID": {
+                "S": "042c9b2e-0417-4dd7-8a52-9bc49c6e5781"
+            },
+            "updatedAt": {
+                "S": "2021-07-11T12:32:20.089Z"
+            },
+            "createdAt": {
+                "S": "2021-07-11T12:32:20.089Z"
+            },
+            "text": {
+                "S": "C’est au moment où tu vois un moustique se poser sur tes testicules que tu te rends compte qu’il y a moyen de régler certains problèmes autrement que par la violence"
+            },
+            "id": {
+                "S": "6ddecdd6-efce-4823-b8cd-f4c7b7e9ca58"
+            },
+            "type": {
+                "S": "Text"
+            }
+        },
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "userID": {
+                "S": "1a7a21aa-f446-41f7-8040-ca0b7678e2c4"
+            },
+            "updatedAt": {
+                "S": "2021-07-11T12:39:01.462Z"
+            },
+            "createdAt": {
+                "S": "2021-07-11T12:39:01.462Z"
+            },
+            "text": {
+                "S": "C’est au moment où tu vois un moustique se poser sur tes testicules que tu te rends compte qu’il y a moyen de régler certains problèmes autrement que par la violence"
+            },
+            "id": {
+                "S": "2a87c875-b58c-4a11-bfb1-98513fd4c25a"
+            },
+            "type": {
+                "S": "Text"
+            }
+        },
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "image": {
+                "S": "653048cf-d8fa-4a93-b2ce-0cc879231597.jpg"
+            },
+            "userID": {
+                "S": "1a7a21aa-f446-41f7-8040-ca0b7678e2c4"
+            },
+            "updatedAt": {
+                "S": "2021-07-11T12:39:03.577Z"
+            },
+            "createdAt": {
+                "S": "2021-07-11T12:39:03.577Z"
+            },
+            "id": {
+                "S": "cd82c1c4-90fb-4fd7-8807-46515b3d5dc3"
+            },
+            "type": {
+                "S": "Image"
+            }
+        },
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "userID": {
+                "S": "042c9b2e-0417-4dd7-8a52-9bc49c6e5781"
+            },
+            "updatedAt": {
+                "S": "2021-07-11T12:32:03.707Z"
+            },
+            "createdAt": {
+                "S": "2021-07-11T12:32:03.707Z"
+            },
+            "text": {
+                "S": "Un docteur à son patient : Le soir, avant de vous coucher, laisser vos soucis au pied du lit. Mais, je ne peux pas docteur, ma femme n’acceptera jamais de dormir par terre !.."
+            },
+            "id": {
+                "S": "cbff1d7f-1eea-421a-86ba-31bde0888121"
+            },
+            "type": {
+                "S": "Text"
+            }
+        },
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "userID": {
+                "S": "1a7a21aa-f446-41f7-8040-ca0b7678e2c4"
+            },
+            "updatedAt": {
+                "S": "2021-07-11T12:38:50.390Z"
+            },
+            "createdAt": {
+                "S": "2021-07-11T12:38:50.390Z"
+            },
+            "text": {
+                "S": "Si tu dors et que tu rêves que tu dors, il faut que tu te réveilles deux fois pour te lever.."
+            },
+            "id": {
+                "S": "a5db5bb6-1bcb-4421-a931-af2ccd75270c"
+            },
+            "type": {
+                "S": "Text"
+            }
+        },
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "userID": {
+                "S": "042c9b2e-0417-4dd7-8a52-9bc49c6e5781"
+            },
+            "updatedAt": {
+                "S": "2021-07-11T12:32:17.491Z"
+            },
+            "createdAt": {
+                "S": "2021-07-11T12:32:17.491Z"
+            },
+            "text": {
+                "S": "Ca m’en touche une sans faire bouger l’autre !"
+            },
+            "id": {
+                "S": "64b0880f-907e-45fa-82b9-c1d1afd6741f"
+            },
+            "type": {
+                "S": "Text"
+            }
+        },
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "userID": {
+                "S": "1a7a21aa-f446-41f7-8040-ca0b7678e2c4"
+            },
+            "updatedAt": {
+                "S": "2021-07-11T12:38:56.957Z"
+            },
+            "createdAt": {
+                "S": "2021-07-11T12:38:56.957Z"
+            },
+            "text": {
+                "S": "Ca m’en touche une sans faire bouger l’autre !"
+            },
+            "id": {
+                "S": "43bfabec-2d1c-4593-874c-ef854343ae2e"
+            },
+            "type": {
+                "S": "Text"
+            }
+        },
+        {
+            "__typename": {
+                "S": "Fleet"
+            },
+            "image": {
+                "NULL": true
+            },
+            "userID": {
+                "S": "571764d0-972c-42df-9654-52cfbf69141e"
+            },
+            "updatedAt": {
+                "S": "2021-07-14T02:33:01.634Z"
+            },
+            "createdAt": {
+                "S": "2021-07-14T02:33:01.634Z"
+            },
+            "text": {
+                "S": "Hello people :)"
+            },
+            "id": {
+                "S": "1c10d89a-e75c-4c38-ba22-086f38ee36d3"
+            },
+            "type": {
+                "S": "Text"
+            }
+        }
+    ],
+    "Count": 10,
+    "ScannedCount": 10,
+    "ConsumedCapacity": null
+}

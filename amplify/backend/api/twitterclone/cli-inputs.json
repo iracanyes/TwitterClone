@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "twitterclone",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Projets\\mobile\\react-native\\exercice\\TwitterClone\\amplify\\backend\\api\\twitterclone\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authtwitterclone92f6727f"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 7,
+        "apiKeyExpirationDate": "2022-01-16T15:22:03.111Z",
+        "keyDescription": "API Key for Amplify API"
+      }
+    ],
+    "conflictResolution": {}
+  }
+}

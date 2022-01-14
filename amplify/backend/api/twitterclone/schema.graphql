@@ -1,3 +1,7 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
 #type Task
 #  @model
 #  @auth(
@@ -6,7 +10,7 @@
 #      { allow: groups, groups: ["Employees"], queries: [get, list], mutations: null }
 #    ]
 #  ) {
-#  id: ID!
+#  id: ID! @primaryKey
 #  title: String!
 #  description: String
 #  status: String
@@ -19,54 +23,51 @@
 type User
 @model
 {
-  id: ID!
+  id: ID! @primaryKey
   username: String!
   name: String
   email: String!
   accountType: String
   status: String
   image: String
-  tweets: [Tweet] @connection(keyName: "byUser", fields: ["id"])
-  fleets: [Fleet] @connection(keyName: "byUser", fields: ["id"])
+  tweets: [Tweet] @hasMany(indexName: "byUser",  fields: ["id"])
+  fleets: [Fleet] @hasMany(indexName: "byUser",  fields: ["id"])
+  likes: [Like] @hasMany(indexName: "byUser",  fields: ["id"])
 }
 
 type Tweet
 @model
-@key(name: "byUser", fields: ["userID"])
-@key(name: "byDate", fields: ["createdAt"], queryField: "tweetsByDate")
 {
-  id: ID!
+  id: ID! @primaryKey
   content: String!
   image: String
-  userID: ID!
-  user: User @connection(fields: ["userID"])
-  likes: [Like] @connection(keyName: "byTweet", fields: ["id"])
-  createdAt: String!
+  userID: ID! @index(name: "byUser", sortKeyFields: ["createdAt"])
+  user: User @belongsTo(fields: ["userID"])
+  likes: [Like] @hasMany(indexName: "byTweet", fields: ["id"])
+  createdAt: String! @index(name: "byDate", queryField: "tweetsByDate")
 }
 
 type Fleet
 @model
-@key(name: "byUser", fields: ["userID"])
 {
-  id: ID!
+  id: ID! @primaryKey
   type: String!
   text: String
   image: String
-  userID: ID!
-  user: User @connection(fields: ["userID"])
+  userID: ID! @index(name: "byUser", sortKeyFields: ["createdAt"])
+  user: User @belongsTo(fields: ["userID"])
+  createdAt: String!
 }
 
 type Like
 # Disable queries as it's not needed. Likes while be queried with their tweets
 @model(queries: null)
 # 2 keys for the many-to-many relations between User and Tweet.
-@key(name: "byUser", fields: ["userID","tweetID"])
-@key(name: "byTweet", fields: ["tweetID", "userID"])
 {
-  id: ID!
-  userID: ID!
-  tweetID: ID!
-  user: User! @connection(fields: ["userID"])
-  tweet: Tweet! @connection(fields: ["tweetID"])
+  id: ID! @primaryKey
+  userID: ID! @index(name: "byUser", sortKeyFields: ["tweetID"])
+  tweetID: ID! @index(name: "byTweet", sortKeyFields: ["userID"])
+  user: User! @belongsTo(fields: ["userID"])
+  tweet: Tweet! @belongsTo(fields: ["tweetID"])
 
 }

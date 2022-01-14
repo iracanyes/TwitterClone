@@ -1,0 +1,268 @@
+{
+    "Items": [
+        {
+            "__typename": {
+                "S": "User"
+            },
+            "image": {
+                "S": "http://placeimg.com/640/480/people"
+            },
+            "updatedAt": {
+                "S": "2021-07-09T04:09:56.468Z"
+            },
+            "status": {
+                "S": "Hello world"
+            },
+            "createdAt": {
+                "S": "2021-07-09T04:09:56.468Z"
+            },
+            "username": {
+                "S": "@savin_vadim23"
+            },
+            "id": {
+                "S": "9252aa87-80f0-48c5-9fa1-d44474c5dfb9"
+            },
+            "email": {
+                "S": "savin_vadim23@gmail.com"
+            },
+            "name": {
+                "S": "Savin Vadim"
+            }
+        },
+        {
+            "__typename": {
+                "S": "User"
+            },
+            "image": {
+                "S": "https://placebear.com/640/360"
+            },
+            "updatedAt": {
+                "S": "2021-07-11T02:36:54.111Z"
+            },
+            "status": {
+                "S": "Hello world!"
+            },
+            "createdAt": {
+                "S": "2021-07-11T02:36:54.111Z"
+            },
+            "username": {
+                "S": "@iracanyes"
+            },
+            "id": {
+                "S": "571764d0-972c-42df-9654-52cfbf69141e"
+            },
+            "email": {
+                "S": "iracanyes@gmail.com"
+            },
+            "name": {
+                "S": "iracanyes"
+            }
+        },
+        {
+            "__typename": {
+                "S": "User"
+            },
+            "image": {
+                "S": "http://placeimg.com/640/480/people"
+            },
+            "updatedAt": {
+                "S": "2021-07-09T04:01:20.080Z"
+            },
+            "status": {
+                "S": "ok"
+            },
+            "createdAt": {
+                "S": "2021-07-09T04:01:20.080Z"
+            },
+            "username": {
+                "S": "@sundarPinchai"
+            },
+            "id": {
+                "S": "98da12da-03f2-4143-bfb2-bd2599e53a2d"
+            },
+            "email": {
+                "S": "sundarPinchai@gmail.com"
+            },
+            "name": {
+                "S": "Sundar Pinchai"
+            }
+        },
+        {
+            "__typename": {
+                "S": "User"
+            },
+            "image": {
+                "S": "http://placeimg.com/640/480/people"
+            },
+            "updatedAt": {
+                "S": "2021-07-09T04:10:14.370Z"
+            },
+            "status": {
+                "S": "typesetting industry!"
+            },
+            "createdAt": {
+                "S": "2021-07-09T04:10:14.370Z"
+            },
+            "username": {
+                "S": "@JackDorsey_"
+            },
+            "id": {
+                "S": "880e345f-2af6-4fbe-8a8f-2d020affec36"
+            },
+            "email": {
+                "S": "jackdorsey_@gmail.com"
+            },
+            "name": {
+                "S": "Jack Dorsey"
+            }
+        },
+        {
+            "__typename": {
+                "S": "User"
+            },
+            "image": {
+                "S": "https://placebear.com/640/360"
+            },
+            "updatedAt": {
+                "S": "2021-07-09T18:23:19.961Z"
+            },
+            "status": {
+                "S": "Hello world!"
+            },
+            "createdAt": {
+                "S": "2021-07-09T18:23:19.961Z"
+            },
+            "username": {
+                "S": "@k.iracanye"
+            },
+            "id": {
+                "S": "1a7a21aa-f446-41f7-8040-ca0b7678e2c4"
+            },
+            "email": {
+                "S": "k.iracanye@gmail.com"
+            },
+            "name": {
+                "S": "k.iracanye"
+            }
+        },
+        {
+            "__typename": {
+                "S": "User"
+            },
+            "image": {
+                "S": "http://placeimg.com/640/480/people"
+            },
+            "updatedAt": {
+                "S": "2021-07-09T04:10:05.811Z"
+            },
+            "status": {
+                "S": "Rest in peace!"
+            },
+            "createdAt": {
+                "S": "2021-07-09T04:10:05.811Z"
+            },
+            "username": {
+                "S": "@dmx99"
+            },
+            "id": {
+                "S": "042c9b2e-0417-4dd7-8a52-9bc49c6e5781"
+            },
+            "email": {
+                "S": "dmx99@gmail.com"
+            },
+            "name": {
+                "S": "Dark Man X"
+            }
+        },
+        {
+            "__typename": {
+                "S": "User"
+            },
+            "image": {
+                "S": "http://placeimg.com/640/480/people"
+            },
+            "updatedAt": {
+                "S": "2021-07-09T04:09:49.305Z"
+            },
+            "status": {
+                "S": "Doing childcare!"
+            },
+            "createdAt": {
+                "S": "2021-07-09T04:09:49.305Z"
+            },
+            "username": {
+                "S": "@bill_gate666"
+            },
+            "id": {
+                "S": "cb0d512a-56d1-4918-aa3d-e6301d2fcfee"
+            },
+            "email": {
+                "S": "bill_gate666@gmail.com"
+            },
+            "name": {
+                "S": "Bill Gate"
+            }
+        },
+        {
+            "__typename": {
+                "S": "User"
+            },
+            "image": {
+                "S": "http://placeimg.com/640/480/people"
+            },
+            "updatedAt": {
+                "S": "2021-07-09T04:10:00.923Z"
+            },
+            "status": {
+                "S": "Doing me!"
+            },
+            "createdAt": {
+                "S": "2021-07-09T04:10:00.923Z"
+            },
+            "username": {
+                "S": "@katy_perry54"
+            },
+            "id": {
+                "S": "5b6e9c4b-051d-4bce-b6c2-07ce20993653"
+            },
+            "email": {
+                "S": "katy_perry54@gmail.com"
+            },
+            "name": {
+                "S": "Katy Perry"
+            }
+        },
+        {
+            "__typename": {
+                "S": "User"
+            },
+            "image": {
+                "S": "http://placeimg.com/640/480/people"
+            },
+            "updatedAt": {
+                "S": "2021-07-09T04:10:10.725Z"
+            },
+            "status": {
+                "S": "Rest in peace!"
+            },
+            "createdAt": {
+                "S": "2021-07-09T04:10:10.725Z"
+            },
+            "username": {
+                "S": "@dmx99"
+            },
+            "id": {
+                "S": "7540fea6-6d56-4a54-ba7d-6d9835d34c3e"
+            },
+            "email": {
+                "S": "dmx99@gmail.com"
+            },
+            "name": {
+                "S": "Dark Man X"
+            }
+        }
+    ],
+    "Count": 9,
+    "ScannedCount": 9,
+    "ConsumedCapacity": null
+}

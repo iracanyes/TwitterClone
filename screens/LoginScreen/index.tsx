@@ -1,29 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigation } from "@react-navigation/native";
-import {
-  Alert,
-  ImageBackground,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
-import {Auth, API, Hub, graphqlOperation} from "aws-amplify";
-import { withOAuth } from "aws-amplify-react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  Entypo,
-  AntDesign,
-  MaterialCommunityIcons,
-  Fontisto,
-  FontAwesome
-} from "@expo/vector-icons";
+import React, {useEffect, useState} from 'react';
+import {useNavigation} from "@react-navigation/native";
+import {ImageBackground, Text, TextInput, TouchableOpacity, View,} from "react-native";
+import {API, Auth, graphqlOperation} from "aws-amplify";
+import {withOAuth} from "aws-amplify-react-native";
+import {AntDesign, Entypo, MaterialCommunityIcons} from "@expo/vector-icons";
 import styles from "./styles";
-import { getUser } from "../../graphql/queries";
-import { createUser } from "../../graphql/mutations";
-import { UserInputProps } from "../../types";
+import {getUser, listTweets} from "../../graphql/queries";
+import {createUser} from "../../graphql/mutations";
+import {UserInputProps} from "../../types";
 import BG from "../../assets/images/bg-login1.jpg";
-import { showToast } from '../../widget';
+import {showToast} from '../../widget';
+import clientAppSync from "../../config/appsync_client";
+import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql";
 
 type LoginProps = {
   facebookSignIn: any,
@@ -43,34 +31,73 @@ const LoginScreen = (props: LoginProps) => {
   const [ password, setPassword ] = useState("");
   const [ showPassword, setShowPassword ] = useState(false);
 
+  const getUserInDB = async (cognitoUser: any) => {
+    try{
+      //const response = await API.graphql(graphqlOperation(getUser, {id : cognitoUser.attributes.sub }));
+
+      const response =  await clientAppSync.query({
+        // @ts-ignore
+        query: graphqlOperation(listTweets),
+        //variables: { id: cognitoUser.attributes.sub }
+      });
+      console.log("getUserInDB clientAppSync response", response);
+      // @ts-ignore
+      return response ? response : null;
+
+    }catch (e) {
+      console.error("getUserInDB error\n",e );
+    }
+  };
+
+  const createUserInDB = async (cognitoUser: any, res: any) => {
+    try{
+      if(res === undefined || res.data.getUser === null){
+        console.log("\nUser is null\n");
+        console.log("\nUser is null\n");
+        console.log("\nUser is null\n");
+        // Create User if he doesn't exist in DB
+        console.log("\nUser.username is null\n");
+        const user = {
+          id: cognitoUser.attributes.sub,
+          username: '@' + cognitoUser.attributes.email.split('@')[0],
+          name: cognitoUser.attributes.email.split('@')[0],
+          email: cognitoUser.attributes.email,
+          image: "https://placebear.com/640/360",
+          status: "Hello world!"
+        };
+
+        const res = await persistUser(user);
+        console.log("SUCCESS persistUser res\n", res);
+
+        navigation.navigate('Root', {screen: 'Home'});
+      }
+    }catch (e) {
+      console.error("createUserInDB error\n", e);
+    }
+  };
+
+  /**
+   * Get Authenticated user on first load
+   */
   useEffect(() => {
+
     const getAuthenticatedUser = async () => {
       const cognitoUser = await Auth.currentAuthenticatedUser({ bypassCache: true});
 
-      if(cognitoUser.attributes !== undefined){
-        const response = await API.graphql(graphqlOperation(getUser, {id : cognitoUser.attributes.sub }));
+      if(!('attributes' in cognitoUser)) return;
 
-        if(response.data.getUser !== undefined){
-          // Create User if he doesn't exist in DB
-          if(response.data.getUser.username === undefined){
-            const user = {
-              id: cognitoUser.attributes.sub,
-              username: '@' + cognitoUser.attributes.email.split('@')[0],
-              name: cognitoUser.attributes.email.split('@')[0],
-              email: cognitoUser.attributes.email,
-              image: "https://placebear.com/640/360",
-              status: "Hello world!"
-            };
+      console.log("login cognitoUser\n", cognitoUser);
 
-            await persistUser(user);
+      const res = await getUserInDb(cognitoUser);
 
-          }else{
-            showToast("user already exists in DB");
-          }
-          navigation.navigate('Root', {screen: 'Home'});
-        }
+      console.log("useEffect getUserInDb response", res);
+
+      if(res === undefined || res.data.getUser === null){
+        await createUserInDB(cognitoUser, res);
+      }else{
+        showToast(`Welcome ${res.data.getUser.username}!`);
+        navigation.navigate('Root', { screen: 'Home' })
       }
-
 
     };
 
@@ -100,17 +127,34 @@ const LoginScreen = (props: LoginProps) => {
 
   const getUserInDb = async (user: any) => {
     try{
-      const response = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub}));
+      const response = await API.graphql({
+        query: getUser,
+        variables: { id: user.attributes.sub},
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+      });
+      console.log("getUserInDb response\n", response);
       //@ts-ignore
       return response.data.getUser !== undefined ? response.data.getUser :  null;
     }catch(e){
-      console.warn("Error getUserInDB", e);
+      console.warn("Error getUserInDb", e);
     }
 
   }
 
   const persistUser = async (user: UserInputProps) => {
-    await API.graphql(graphqlOperation(createUser, { input: user} ));
+    try{
+      const res = await API.graphql({
+        // @ts-ignore
+        mutation: createUser,
+        variables: { input: user},
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+      });
+
+      console.log("persistUser res\n", res);
+    }catch (e) {
+      console.error("persistUser error\n", e);
+    }
+
   };
 
   const signIn = async () => {
@@ -126,10 +170,10 @@ const LoginScreen = (props: LoginProps) => {
 
       // Vérifie si l'utilisateur existe en db sinon on le crée
       if(cognitoUser.attributes !== undefined){
-        const user = getUserInDb(cognitoUser);
+        const res = await getUserInDb(cognitoUser);
 
         // Create User if he doesn't exist in DB
-        if(user.username === undefined){
+        if(res.data.getUser.username === undefined){
           const userInput = {
             id: cognitoUser.attributes.sub,
             username: '@' + cognitoUser.attributes.email.split('@')[0],
@@ -142,12 +186,13 @@ const LoginScreen = (props: LoginProps) => {
           await persistUser(userInput);
 
         }else{
-          showToast("user already exists in DB");
+          showToast(`Welcome ${res.data.getUser.username}`);
         }
 
         // Redirection vers la page d'accueil
         navigation.navigate('Root', { screen: 'Home' });
       }else{
+        showToast("User doesn't exitst ! Please subscribe.");
         navigation.navigate('Subscribe');
         return;
       }

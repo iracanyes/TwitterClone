@@ -8,15 +8,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import {Auth, API, Hub, graphqlOperation} from "aws-amplify";
-import { withOAuth } from "aws-amplify-react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {Auth, API, graphqlOperation} from "aws-amplify";
 import {
-  Entypo,
-  AntDesign,
   MaterialCommunityIcons,
-  Fontisto,
-  FontAwesome
 } from "@expo/vector-icons";
 import styles from "./styles";
 import { getUser } from "../../graphql/queries";
@@ -30,6 +24,7 @@ type ConfirmSubscribeProps = {
 
 const ConfirmSignUpScreen = (props: ConfirmSubscribeProps) => {
   const route = useRoute();
+  // @ts-ignore
   const { username }  = route.params;
   const navigation = useNavigation();
   const [ user, setUser ] = useState(null);

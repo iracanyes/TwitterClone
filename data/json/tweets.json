@@ -1,0 +1,73 @@
+{
+  "Items": [
+    {
+      "__typename": {
+        "S": "Tweet"
+      },
+      "content": {
+        "S": "  Toto revient de l'�cole le jour de la rentr�e. Sa m�re lui demande :\n\n- Alors Toto, comment s'est pass� ce jour de la rentr�e ?\n\n- G�nial. En plus j'ai fait comme papa. J'ai chang� de ma�tresse !"
+      },
+      "image": {
+        "S": "653048cf-d8fa-4a93-b2ce-0cc879231597.jpg"
+      },
+      "userID": {
+        "S": "1a7a21aa-f446-41f7-8040-ca0b7678e2c4"
+      },
+      "updatedAt": {
+        "S": "2021-07-11T02:12:29.040Z"
+      },
+      "createdAt": {
+        "S": "2021-07-11T02:12:29.040Z"
+      },
+      "id": {
+        "S": "394ffc0b-2cb5-4294-a7f2-e7fff84a4f20"
+      }
+    },
+    {
+      "__typename": {
+        "S": "Tweet"
+      },
+      "content": {
+        "S": "First image uploaded!"
+      },
+      "image": {
+        "S": "3a20b73b-d6e7-4ed9-a0b7-82183a192b64.jpg"
+      },
+      "userID": {
+        "S": "1a7a21aa-f446-41f7-8040-ca0b7678e2c4"
+      },
+      "updatedAt": {
+        "S": "2021-07-11T02:08:28.368Z"
+      },
+      "createdAt": {
+        "S": "2021-07-11T02:08:28.368Z"
+      },
+      "id": {
+        "S": "356dc946-eaad-40c2-ac77-6d4935a8fd50"
+      }
+    },
+    {
+      "__typename": {
+        "S": "Tweet"
+      },
+      "content": {
+        "S": "T�t dans la matin�e, tandis que je faisais un somme apr�s avoir fini de traduire Guerre & Paix en Mandarin, ma vieille grand-m�re a d�mont� mon portable qui n'a donc pas sonn�, et ce n'est qu'avec l'arriv�e du SAMU, venu chercher ma grand-m�re que j'ai bondi hors de mon lit pour me ruer au bureau."
+      },
+      "image": {
+        "S": "21d090de-5e2d-4607-a010-60d91b1d80c8.jpg"
+      },
+      "userID": {
+        "S": "cb0d512a-56d1-4918-aa3d-e6301d2fcfee"
+      },
+      "updatedAt": {
+        "S": "2021-07-09T04:50:26.382Z"
+      },
+      "createdAt": {
+        "S": "2021-07-09T04:50:26.382Z"
+      },
+      "id": {
+        "S": "8c991366-4e3c-4495-b5d5-ec759a9bc8a9"
+      }
+    }
+  ]
+}

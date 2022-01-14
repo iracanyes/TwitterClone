@@ -83,11 +83,14 @@ const SubscribeScreen = (props: SubscribeProps) => {
       // inscription Cognito
       const signUpResponse = await signUpRequest;
 
-
+        //console.log("SignUpResponse\n", signUpResponse);
       // Vérifie si l'utilisateur existe en db sinon on le crée
       if(signUpResponse.userSub !== undefined){
         showToast('Inscription confirmée!');
-        navigation.navigate('ConfirmSignUp');
+        navigation.navigate('ConfirmSignUp', {
+          username: signUpResponse.user.username,
+          userSub: signUpResponse.userSub
+        });
       }else{
         showToast("An error occured during the process of sign in");
         console.warn("An error occured during the process of sign in");

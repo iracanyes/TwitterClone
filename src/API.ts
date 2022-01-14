@@ -66,70 +66,71 @@ export type ModelSizeInput = {
 
 export type User = {
   __typename: "User",
-  id?: string,
-  username?: string,
+  id: string,
+  username: string,
   name?: string | null,
-  email?: string,
+  email: string,
   accountType?: string | null,
   status?: string | null,
   image?: string | null,
-  tweets?: ModelTweetConnection,
-  fleets?: ModelFleetConnection,
-  createdAt?: string,
-  updatedAt?: string,
+  tweets?: ModelTweetConnection | null,
+  fleets?: ModelFleetConnection | null,
+  likes?: ModelLikeConnection | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type ModelTweetConnection = {
   __typename: "ModelTweetConnection",
-  items?:  Array<Tweet | null > | null,
+  items:  Array<Tweet | null >,
   nextToken?: string | null,
 };
 
 export type Tweet = {
   __typename: "Tweet",
-  id?: string,
-  content?: string,
+  id: string,
+  content: string,
   image?: string | null,
-  userID?: string,
-  user?: User,
-  likes?: ModelLikeConnection,
-  createdAt?: string,
-  updatedAt?: string,
+  userID: string,
+  user?: User | null,
+  likes?: ModelLikeConnection | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type ModelLikeConnection = {
   __typename: "ModelLikeConnection",
-  items?:  Array<Like | null > | null,
+  items:  Array<Like | null >,
   nextToken?: string | null,
 };
 
 export type Like = {
   __typename: "Like",
-  id?: string,
-  userID?: string,
-  tweetID?: string,
-  user?: User,
-  tweet?: Tweet,
-  createdAt?: string,
-  updatedAt?: string,
+  id: string,
+  userID: string,
+  tweetID: string,
+  user: User,
+  tweet: Tweet,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type ModelFleetConnection = {
   __typename: "ModelFleetConnection",
-  items?:  Array<Fleet | null > | null,
+  items:  Array<Fleet | null >,
   nextToken?: string | null,
 };
 
 export type Fleet = {
   __typename: "Fleet",
-  id?: string,
-  type?: string,
+  id: string,
+  type: string,
   text?: string | null,
   image?: string | null,
-  userID?: string,
-  user?: User,
-  createdAt?: string,
-  updatedAt?: string,
+  userID: string,
+  user?: User | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type UpdateUserInput = {
@@ -143,7 +144,7 @@ export type UpdateUserInput = {
 };
 
 export type DeleteUserInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type CreateTweetInput = {
@@ -151,12 +152,14 @@ export type CreateTweetInput = {
   content: string,
   image?: string | null,
   userID: string,
+  createdAt?: string | null,
 };
 
 export type ModelTweetConditionInput = {
   content?: ModelStringInput | null,
   image?: ModelStringInput | null,
   userID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelTweetConditionInput | null > | null,
   or?: Array< ModelTweetConditionInput | null > | null,
   not?: ModelTweetConditionInput | null,
@@ -183,10 +186,11 @@ export type UpdateTweetInput = {
   content?: string | null,
   image?: string | null,
   userID?: string | null,
+  createdAt?: string | null,
 };
 
 export type DeleteTweetInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type CreateFleetInput = {
@@ -195,6 +199,7 @@ export type CreateFleetInput = {
   text?: string | null,
   image?: string | null,
   userID: string,
+  createdAt?: string | null,
 };
 
 export type ModelFleetConditionInput = {
@@ -202,6 +207,7 @@ export type ModelFleetConditionInput = {
   text?: ModelStringInput | null,
   image?: ModelStringInput | null,
   userID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelFleetConditionInput | null > | null,
   or?: Array< ModelFleetConditionInput | null > | null,
   not?: ModelFleetConditionInput | null,
@@ -213,10 +219,11 @@ export type UpdateFleetInput = {
   text?: string | null,
   image?: string | null,
   userID?: string | null,
+  createdAt?: string | null,
 };
 
 export type DeleteFleetInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type CreateLikeInput = {
@@ -240,7 +247,7 @@ export type UpdateLikeInput = {
 };
 
 export type DeleteLikeInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type ModelUserFilterInput = {
@@ -256,9 +263,15 @@ export type ModelUserFilterInput = {
   not?: ModelUserFilterInput | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
-  items?:  Array<User | null > | null,
+  items:  Array<User | null >,
   nextToken?: string | null,
 };
 
@@ -267,6 +280,7 @@ export type ModelTweetFilterInput = {
   content?: ModelStringInput | null,
   image?: ModelStringInput | null,
   userID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelTweetFilterInput | null > | null,
   or?: Array< ModelTweetFilterInput | null > | null,
   not?: ModelTweetFilterInput | null,
@@ -278,13 +292,14 @@ export type ModelFleetFilterInput = {
   text?: ModelStringInput | null,
   image?: ModelStringInput | null,
   userID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelFleetFilterInput | null > | null,
   or?: Array< ModelFleetFilterInput | null > | null,
   not?: ModelFleetFilterInput | null,
 };
 
 export type CreateUserMutationVariables = {
-  input?: CreateUserInput,
+  input: CreateUserInput,
   condition?: ModelUserConditionInput | null,
 };
 
@@ -300,7 +315,7 @@ export type CreateUserMutation = {
     image?: string | null,
     tweets?:  {
       __typename: "ModelTweetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Tweet",
         id: string,
         content: string,
@@ -308,12 +323,12 @@ export type CreateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     fleets?:  {
       __typename: "ModelFleetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Fleet",
         id: string,
         type: string,
@@ -322,7 +337,19 @@ export type CreateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        tweetID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -331,7 +358,7 @@ export type CreateUserMutation = {
 };
 
 export type UpdateUserMutationVariables = {
-  input?: UpdateUserInput,
+  input: UpdateUserInput,
   condition?: ModelUserConditionInput | null,
 };
 
@@ -347,7 +374,7 @@ export type UpdateUserMutation = {
     image?: string | null,
     tweets?:  {
       __typename: "ModelTweetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Tweet",
         id: string,
         content: string,
@@ -355,12 +382,12 @@ export type UpdateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     fleets?:  {
       __typename: "ModelFleetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Fleet",
         id: string,
         type: string,
@@ -369,7 +396,19 @@ export type UpdateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        tweetID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -378,7 +417,7 @@ export type UpdateUserMutation = {
 };
 
 export type DeleteUserMutationVariables = {
-  input?: DeleteUserInput,
+  input: DeleteUserInput,
   condition?: ModelUserConditionInput | null,
 };
 
@@ -394,7 +433,7 @@ export type DeleteUserMutation = {
     image?: string | null,
     tweets?:  {
       __typename: "ModelTweetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Tweet",
         id: string,
         content: string,
@@ -402,12 +441,12 @@ export type DeleteUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     fleets?:  {
       __typename: "ModelFleetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Fleet",
         id: string,
         type: string,
@@ -416,7 +455,19 @@ export type DeleteUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        tweetID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -425,7 +476,7 @@ export type DeleteUserMutation = {
 };
 
 export type CreateTweetMutationVariables = {
-  input?: CreateTweetInput,
+  input: CreateTweetInput,
   condition?: ModelTweetConditionInput | null,
 };
 
@@ -453,19 +504,23 @@ export type CreateTweetMutation = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Like",
         id: string,
         userID: string,
         tweetID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -474,7 +529,7 @@ export type CreateTweetMutation = {
 };
 
 export type UpdateTweetMutationVariables = {
-  input?: UpdateTweetInput,
+  input: UpdateTweetInput,
   condition?: ModelTweetConditionInput | null,
 };
 
@@ -502,19 +557,23 @@ export type UpdateTweetMutation = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Like",
         id: string,
         userID: string,
         tweetID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -523,7 +582,7 @@ export type UpdateTweetMutation = {
 };
 
 export type DeleteTweetMutationVariables = {
-  input?: DeleteTweetInput,
+  input: DeleteTweetInput,
   condition?: ModelTweetConditionInput | null,
 };
 
@@ -551,19 +610,23 @@ export type DeleteTweetMutation = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Like",
         id: string,
         userID: string,
         tweetID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -572,7 +635,7 @@ export type DeleteTweetMutation = {
 };
 
 export type CreateFleetMutationVariables = {
-  input?: CreateFleetInput,
+  input: CreateFleetInput,
   condition?: ModelFleetConditionInput | null,
 };
 
@@ -601,6 +664,10 @@ export type CreateFleetMutation = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -610,7 +677,7 @@ export type CreateFleetMutation = {
 };
 
 export type UpdateFleetMutationVariables = {
-  input?: UpdateFleetInput,
+  input: UpdateFleetInput,
   condition?: ModelFleetConditionInput | null,
 };
 
@@ -639,6 +706,10 @@ export type UpdateFleetMutation = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -648,7 +719,7 @@ export type UpdateFleetMutation = {
 };
 
 export type DeleteFleetMutationVariables = {
-  input?: DeleteFleetInput,
+  input: DeleteFleetInput,
   condition?: ModelFleetConditionInput | null,
 };
 
@@ -677,6 +748,10 @@ export type DeleteFleetMutation = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -686,7 +761,7 @@ export type DeleteFleetMutation = {
 };
 
 export type CreateLikeMutationVariables = {
-  input?: CreateLikeInput,
+  input: CreateLikeInput,
   condition?: ModelLikeConditionInput | null,
 };
 
@@ -711,6 +786,10 @@ export type CreateLikeMutation = {
       } | null,
       fleets?:  {
         __typename: "ModelFleetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -747,7 +826,7 @@ export type CreateLikeMutation = {
 };
 
 export type UpdateLikeMutationVariables = {
-  input?: UpdateLikeInput,
+  input: UpdateLikeInput,
   condition?: ModelLikeConditionInput | null,
 };
 
@@ -772,6 +851,10 @@ export type UpdateLikeMutation = {
       } | null,
       fleets?:  {
         __typename: "ModelFleetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -808,7 +891,7 @@ export type UpdateLikeMutation = {
 };
 
 export type DeleteLikeMutationVariables = {
-  input?: DeleteLikeInput,
+  input: DeleteLikeInput,
   condition?: ModelLikeConditionInput | null,
 };
 
@@ -833,6 +916,10 @@ export type DeleteLikeMutation = {
       } | null,
       fleets?:  {
         __typename: "ModelFleetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -869,7 +956,7 @@ export type DeleteLikeMutation = {
 };
 
 export type GetUserQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetUserQuery = {
@@ -884,7 +971,7 @@ export type GetUserQuery = {
     image?: string | null,
     tweets?:  {
       __typename: "ModelTweetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Tweet",
         id: string,
         content: string,
@@ -892,12 +979,12 @@ export type GetUserQuery = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     fleets?:  {
       __typename: "ModelFleetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Fleet",
         id: string,
         type: string,
@@ -906,7 +993,19 @@ export type GetUserQuery = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        tweetID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -915,15 +1014,17 @@ export type GetUserQuery = {
 };
 
 export type ListUsersQueryVariables = {
+  id?: string | null,
   filter?: ModelUserFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListUsersQuery = {
   listUsers?:  {
     __typename: "ModelUserConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "User",
       id: string,
       username: string,
@@ -940,15 +1041,19 @@ export type ListUsersQuery = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type GetTweetQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetTweetQuery = {
@@ -975,19 +1080,23 @@ export type GetTweetQuery = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Like",
         id: string,
         userID: string,
         tweetID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -996,15 +1105,17 @@ export type GetTweetQuery = {
 };
 
 export type ListTweetsQueryVariables = {
+  id?: string | null,
   filter?: ModelTweetFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListTweetsQuery = {
   listTweets?:  {
     __typename: "ModelTweetConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Tweet",
       id: string,
       content: string,
@@ -1028,13 +1139,13 @@ export type ListTweetsQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type GetFleetQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetFleetQuery = {
@@ -1062,6 +1173,10 @@ export type GetFleetQuery = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1071,15 +1186,17 @@ export type GetFleetQuery = {
 };
 
 export type ListFleetsQueryVariables = {
+  id?: string | null,
   filter?: ModelFleetFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListFleetsQuery = {
   listFleets?:  {
     __typename: "ModelFleetConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Fleet",
       id: string,
       type: string,
@@ -1100,7 +1217,47 @@ export type ListFleetsQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type TweetsByDateQueryVariables = {
+  createdAt?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelTweetFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type TweetsByDateQuery = {
+  tweetsByDate?:  {
+    __typename: "ModelTweetConnection",
+    items:  Array< {
+      __typename: "Tweet",
+      id: string,
+      content: string,
+      image?: string | null,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        username: string,
+        name?: string | null,
+        email: string,
+        accountType?: string | null,
+        status?: string | null,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1117,7 +1274,7 @@ export type OnCreateUserSubscription = {
     image?: string | null,
     tweets?:  {
       __typename: "ModelTweetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Tweet",
         id: string,
         content: string,
@@ -1125,12 +1282,12 @@ export type OnCreateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     fleets?:  {
       __typename: "ModelFleetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Fleet",
         id: string,
         type: string,
@@ -1139,7 +1296,19 @@ export type OnCreateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        tweetID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1159,7 +1328,7 @@ export type OnUpdateUserSubscription = {
     image?: string | null,
     tweets?:  {
       __typename: "ModelTweetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Tweet",
         id: string,
         content: string,
@@ -1167,12 +1336,12 @@ export type OnUpdateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     fleets?:  {
       __typename: "ModelFleetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Fleet",
         id: string,
         type: string,
@@ -1181,7 +1350,19 @@ export type OnUpdateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        tweetID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1201,7 +1382,7 @@ export type OnDeleteUserSubscription = {
     image?: string | null,
     tweets?:  {
       __typename: "ModelTweetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Tweet",
         id: string,
         content: string,
@@ -1209,12 +1390,12 @@ export type OnDeleteUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     fleets?:  {
       __typename: "ModelFleetConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Fleet",
         id: string,
         type: string,
@@ -1223,7 +1404,19 @@ export type OnDeleteUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        tweetID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1255,19 +1448,23 @@ export type OnCreateTweetSubscription = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Like",
         id: string,
         userID: string,
         tweetID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1299,19 +1496,23 @@ export type OnUpdateTweetSubscription = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Like",
         id: string,
         userID: string,
         tweetID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1343,19 +1544,23 @@ export type OnDeleteTweetSubscription = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Like",
         id: string,
         userID: string,
         tweetID: string,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1386,6 +1591,10 @@ export type OnCreateFleetSubscription = {
       } | null,
       fleets?:  {
         __typename: "ModelFleetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -1421,6 +1630,10 @@ export type OnUpdateFleetSubscription = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1454,6 +1667,10 @@ export type OnDeleteFleetSubscription = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1483,6 +1700,10 @@ export type OnCreateLikeSubscription = {
       } | null,
       fleets?:  {
         __typename: "ModelFleetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -1541,6 +1762,10 @@ export type OnUpdateLikeSubscription = {
         __typename: "ModelFleetConnection",
         nextToken?: string | null,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -1595,6 +1820,10 @@ export type OnDeleteLikeSubscription = {
       } | null,
       fleets?:  {
         __typename: "ModelFleetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
