@@ -10,10 +10,8 @@ import {TweetProps} from "../../types";
 import Colors from "../../constants/Colors";
 import styles from "./styles";
 
-
-
 const Tweet = ({ tweet }: TweetProps) => {
-
+  // console.log("TweetComponent tweet\n", tweet);
   return (
     <View style={styles.container}>
       {/* LeftContainer */}

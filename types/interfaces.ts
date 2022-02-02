@@ -17,6 +17,9 @@ export interface IFleet {
   text: string;
   createdAt: string;
 
+  userID: string;
+  user: IUser;
+
 }
 
 export interface IFleetViewProps {

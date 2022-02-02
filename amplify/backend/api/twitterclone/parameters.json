@@ -2,6 +2,7 @@
   "AppSyncApiName": "twitterclone",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-01-15T21:39:57.749Z",
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
       "authtwitterclone92f6727f",

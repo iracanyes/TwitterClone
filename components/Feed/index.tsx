@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
-import {
-  FlatList,
-  View,
-  StyleSheet
-} from "react-native";
-import tweets from "../../data/tweets";
+import React, {useEffect, useState} from "react";
+import {FlatList, StyleSheet, View} from "react-native";
 import Tweet from "../Tweet";
-import { API, Auth, graphqlOperation } from "aws-amplify";
-import { listTweets } from "../../graphql/queries";
+import {API} from "aws-amplify";
+import {listTweets} from "../../graphql/queries";
 import UserFleetsList from "../UserFleetsList";
+import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql";
 
 export type FeedProps = {
 
@@ -21,7 +17,13 @@ const Feed = (props: FeedProps) => {
   const fetchTweets = async () => {
     setLoading(true);
     try{
-      const response = await API.graphql(graphqlOperation(listTweets));
+      const response = await API.graphql({
+        query: listTweets,
+        //authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+        authMode: GRAPHQL_AUTH_MODE.API_KEY
+      });
+
+      //console.log("fetchTweets listTweets\n", response);
 
       if(response.data.listTweets !== undefined){
         setTweets(response.data.listTweets.items);
@@ -31,13 +33,9 @@ const Feed = (props: FeedProps) => {
     }finally {
       setLoading(false);
     }
-
-
   };
 
   useEffect(() => {
-
-
     fetchTweets();
   }, []);
 

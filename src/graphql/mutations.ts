@@ -23,6 +23,7 @@ export const createUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -35,6 +36,7 @@ export const createUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -45,11 +47,13 @@ export const createUser = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -74,6 +78,7 @@ export const updateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -86,6 +91,7 @@ export const updateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -96,11 +102,13 @@ export const updateUser = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -125,6 +133,7 @@ export const deleteUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -137,6 +146,7 @@ export const deleteUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -147,11 +157,13 @@ export const deleteUser = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -184,6 +196,7 @@ export const createTweet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       likes {
         items {
@@ -192,11 +205,13 @@ export const createTweet = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -229,6 +244,7 @@ export const updateTweet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       likes {
         items {
@@ -237,11 +253,13 @@ export const updateTweet = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -274,6 +292,7 @@ export const deleteTweet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       likes {
         items {
@@ -282,11 +301,13 @@ export const deleteTweet = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -320,9 +341,11 @@ export const createFleet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -356,9 +379,11 @@ export const updateFleet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -392,9 +417,11 @@ export const deleteFleet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -426,6 +453,7 @@ export const createLike = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       tweet {
         id
@@ -442,15 +470,18 @@ export const createLike = /* GraphQL */ `
           image
           createdAt
           updatedAt
+          owner
         }
         likes {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -482,6 +513,7 @@ export const updateLike = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       tweet {
         id
@@ -498,15 +530,18 @@ export const updateLike = /* GraphQL */ `
           image
           createdAt
           updatedAt
+          owner
         }
         likes {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -538,6 +573,7 @@ export const deleteLike = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       tweet {
         id
@@ -554,15 +590,18 @@ export const deleteLike = /* GraphQL */ `
           image
           createdAt
           updatedAt
+          owner
         }
         likes {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;

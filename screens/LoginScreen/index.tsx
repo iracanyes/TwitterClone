@@ -31,46 +31,40 @@ const LoginScreen = (props: LoginProps) => {
   const [ password, setPassword ] = useState("");
   const [ showPassword, setShowPassword ] = useState(false);
 
-  const getUserInDB = async (cognitoUser: any) => {
+  const getUserInDb = async (user: any) => {
     try{
-      //const response = await API.graphql(graphqlOperation(getUser, {id : cognitoUser.attributes.sub }));
-
-      const response =  await clientAppSync.query({
-        // @ts-ignore
-        query: graphqlOperation(listTweets),
-        //variables: { id: cognitoUser.attributes.sub }
+      const response = await API.graphql({
+        query: getUser,
+        variables: { id: user.attributes.sub},
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
       });
-      console.log("getUserInDB clientAppSync response", response);
-      // @ts-ignore
-      return response ? response : null;
 
-    }catch (e) {
-      console.error("getUserInDB error\n",e );
+      // console.log("getUserInDb response\n", response);
+      //@ts-ignore
+      return response.data.getUser !== undefined ? response.data.getUser :  null;
+    }catch(e){
+      console.warn("Error getUserInDb", e);
     }
+
   };
 
-  const createUserInDB = async (cognitoUser: any, res: any) => {
+  const createUserInDB = async (cognitoUser: any) => {
     try{
-      if(res === undefined || res.data.getUser === null){
-        console.log("\nUser is null\n");
-        console.log("\nUser is null\n");
-        console.log("\nUser is null\n");
-        // Create User if he doesn't exist in DB
-        console.log("\nUser.username is null\n");
-        const user = {
-          id: cognitoUser.attributes.sub,
-          username: '@' + cognitoUser.attributes.email.split('@')[0],
-          name: cognitoUser.attributes.email.split('@')[0],
-          email: cognitoUser.attributes.email,
-          image: "https://placebear.com/640/360",
-          status: "Hello world!"
-        };
+      // Create User if he doesn't exist in DB
+      const user = {
+        id: cognitoUser.attributes.sub,
+        username: '@' + cognitoUser.attributes.email.split('@')[0],
+        name: cognitoUser.attributes.email.split('@')[0],
+        email: cognitoUser.attributes.email,
+        image: "https://placebear.com/640/360",
+        status: "Hello world!"
+      };
 
-        const res = await persistUser(user);
-        console.log("SUCCESS persistUser res\n", res);
+      const res = await persistUser(user);
 
-        navigation.navigate('Root', {screen: 'Home'});
-      }
+      // console.log("SUCCESS persistUser res\n", res);
+
+      navigation.navigate('Root', {screen: 'Home'});
     }catch (e) {
       console.error("createUserInDB error\n", e);
     }
@@ -86,17 +80,17 @@ const LoginScreen = (props: LoginProps) => {
 
       if(!('attributes' in cognitoUser)) return;
 
-      console.log("login cognitoUser\n", cognitoUser);
+      // console.log("login cognitoUser\n", cognitoUser);
 
-      const res = await getUserInDb(cognitoUser);
+      const userData = await getUserInDb(cognitoUser);
 
-      console.log("useEffect getUserInDb response", res);
+      // console.log("useEffect getUserInDb response", userData);
 
-      if(res === undefined || res.data.getUser === null){
-        await createUserInDB(cognitoUser, res);
+      if(userData === null){
+        await createUserInDB(cognitoUser);
       }else{
-        showToast(`Welcome ${res.data.getUser.username}!`);
-        navigation.navigate('Root', { screen: 'Home' })
+        showToast(`Welcome ${ userData.username }!`);
+        navigation.navigate('Root', { screen: 'Home' });
       }
 
     };
@@ -125,32 +119,20 @@ const LoginScreen = (props: LoginProps) => {
 
   };
 
-  const getUserInDb = async (user: any) => {
-    try{
-      const response = await API.graphql({
-        query: getUser,
-        variables: { id: user.attributes.sub},
-        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
-      });
-      console.log("getUserInDb response\n", response);
-      //@ts-ignore
-      return response.data.getUser !== undefined ? response.data.getUser :  null;
-    }catch(e){
-      console.warn("Error getUserInDb", e);
-    }
-
-  }
-
   const persistUser = async (user: UserInputProps) => {
     try{
+      // console.log("persistUser user", user);
+
       const res = await API.graphql({
         // @ts-ignore
-        mutation: createUser,
-        variables: { input: user},
+        query: createUser,
+        variables: { input: user },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
       });
 
-      console.log("persistUser res\n", res);
+      // console.log("persistUser res\n", res);
+
+      return res;
     }catch (e) {
       console.error("persistUser error\n", e);
     }
@@ -166,14 +148,12 @@ const LoginScreen = (props: LoginProps) => {
       // authentification Cognito
       const cognitoUser = await Auth.signIn(email, password);
 
-
-
       // Vérifie si l'utilisateur existe en db sinon on le crée
       if(cognitoUser.attributes !== undefined){
-        const res = await getUserInDb(cognitoUser);
+        const user = await getUserInDb(cognitoUser);
 
         // Create User if he doesn't exist in DB
-        if(res.data.getUser.username === undefined){
+        if(user === null || user.name === undefined){
           const userInput = {
             id: cognitoUser.attributes.sub,
             username: '@' + cognitoUser.attributes.email.split('@')[0],
@@ -186,7 +166,7 @@ const LoginScreen = (props: LoginProps) => {
           await persistUser(userInput);
 
         }else{
-          showToast(`Welcome ${res.data.getUser.username}`);
+          showToast(`Welcome ${user.name}`);
         }
 
         // Redirection vers la page d'accueil

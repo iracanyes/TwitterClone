@@ -20,6 +20,7 @@ export const getUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -32,6 +33,7 @@ export const getUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -42,11 +44,13 @@ export const getUser = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -84,6 +88,7 @@ export const listUsers = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -115,6 +120,7 @@ export const getTweet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       likes {
         items {
@@ -123,11 +129,13 @@ export const getTweet = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -161,84 +169,14 @@ export const listTweets = /* GraphQL */ `
           image
           createdAt
           updatedAt
+          owner
         }
         likes {
           nextToken
         }
         createdAt
         updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getFleet = /* GraphQL */ `
-  query GetFleet($id: ID!) {
-    getFleet(id: $id) {
-      id
-      type
-      text
-      image
-      userID
-      user {
-        id
-        username
-        name
-        email
-        accountType
-        status
-        image
-        tweets {
-          nextToken
-        }
-        fleets {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listFleets = /* GraphQL */ `
-  query ListFleets(
-    $id: ID
-    $filter: ModelFleetFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listFleets(
-      id: $id
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        id
-        type
-        text
-        image
-        userID
-        user {
-          id
-          username
-          name
-          email
-          accountType
-          status
-          image
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
+        owner
       }
       nextToken
     }
@@ -274,12 +212,131 @@ export const tweetsByDate = /* GraphQL */ `
           image
           createdAt
           updatedAt
+          owner
         }
         likes {
           nextToken
         }
         createdAt
         updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getFleet = /* GraphQL */ `
+  query GetFleet($id: ID!) {
+    getFleet(id: $id) {
+      id
+      type
+      text
+      image
+      userID
+      user {
+        id
+        username
+        name
+        email
+        accountType
+        status
+        image
+        tweets {
+          nextToken
+        }
+        fleets {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listFleets = /* GraphQL */ `
+  query ListFleets(
+    $id: ID
+    $filter: ModelFleetFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listFleets(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        type
+        text
+        image
+        userID
+        user {
+          id
+          username
+          name
+          email
+          accountType
+          status
+          image
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const fleetsByDate = /* GraphQL */ `
+  query FleetsByDate(
+    $createdAt: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelFleetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    fleetsByDate(
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        text
+        image
+        userID
+        user {
+          id
+          username
+          name
+          email
+          accountType
+          status
+          image
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }

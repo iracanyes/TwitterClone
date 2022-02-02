@@ -3,7 +3,9 @@
  * https://reactnavigation.org/docs/typescript/
  */
 import {User} from "./API";
-import {IUser} from "./types/interfaces";
+import {IFleet, IUser} from "./types/interfaces";
+
+export type AppProps = { oAuthUser: any; oAuthError: any; hostedUISignIn: any; facebookSignIn: any; googleSignIn: any; amazonSignIn: any; };
 
 export type RootStackParamList = {
   Login: undefined;
@@ -111,8 +113,8 @@ export type UserInputProps = {
 
 export type UserFleetPreviewProps = {
   index: number;
-  user: IUser,
-  usersWithFleets: IUser[]|null;
+  fleet: IFleet,
+  fleets: IFleet[]|null;
 };
 
 export type UserFleetListProps = {};

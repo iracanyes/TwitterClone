@@ -3,8 +3,6 @@ export type AmplifyDependentResourcesAttributes = {
         "twitterclone92f6727f": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
-            "HostedUIDomain": "string",
-            "OAuthMetadata": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",
@@ -17,6 +15,12 @@ export type AmplifyDependentResourcesAttributes = {
             "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
+        }
+    },
+    "storage": {
+        "twitterClone": {
+            "BucketName": "string",
+            "Region": "string"
         }
     }
 }

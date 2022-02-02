@@ -1,73 +1,84 @@
-import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-} from "react-native";
+import React, {useEffect, useState} from "react";
+import {FlatList, View,} from "react-native";
 import styles from "./styles";
-import { API, Auth, graphqlOperation } from "aws-amplify";
+import {API, Auth} from "aws-amplify";
 import UserFleetPreview from "../UserFleetPreview";
 import {UserFleetListProps} from "../../types";
-import { listUsersWithFleets } from "../../graphql/custom-queries";
-import {IUser} from "../../types/interfaces";
+import {IFleet} from "../../types/interfaces";
+import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql";
+import {listFleets} from "../../src/graphql/queries";
 
 const UserFleetsList = (props: UserFleetListProps) => {
-  const [ usersWithFleets, setUsersWithFleets ] = useState<IUser[]|null>(null);
+  const [ fleets, setFleets ] = useState<any|null>(null);
+
+  const groupByUserId = (fleets: IFleet[]) => {
+    let acc = [];
+    let result = [];
+    result = fleets.reduce((acc= [], el: any) => {
+
+      acc[el.user.id] = acc[el.user.id] || [];
+      acc[el.user.id].push(el);
+      return acc;
+    }, Object.create(null));
+
+    let res = [];
+    // Empty user with id = 0 for flatlist unique key
+    res.push([{ id: 0, user: {id: "000"} }]);
+    let a = 1;
+    for(const el in result){
+      res[a] = result[el];
+      a++;
+    }
+
+    console.log("UserFleetsList fleets groupByUserID", res);
+
+    return res;
+  };
+
+  const fetchFleets = async () => {
+    const cognitoUser = await Auth.currentAuthenticatedUser();
+
+    // Autres possibles:
+    // Version simple: tous les fleets by date
+    const res = await API.graphql({
+      query: listFleets,
+      // Date now
+      // beginWith: new Date().toISOString().split('T')[0]
+      variables: { filter: {
+        createdAt: { beginsWith: "2021-07-11" },
+        userID: { notContains: cognitoUser.attributes.sub }
+      }},
+      authMode: GRAPHQL_AUTH_MODE.API_KEY
+    });
+
+
+    // console.log('fetchUserFleets res', res);
+    //@ts-ignore
+    if(res.data.listFleets !== undefined){
+      //console.log('UserFleetsList fetchFleets res', res);
+
+      //@ts-ignore
+      setFleets(groupByUserId(res.data.listFleets.items));
+    }
+  };
 
   useEffect(() => {
-    const fetchUserFleets = async () => {
-      const cognitoUser = await Auth.currentAuthenticatedUser();
-
-      // Autres possibles:
-      // Modifier le schéma pour permettre de requérir les utilisateurs ayant des fleets
-      // + getUser pour l'utilisateur authentifié.
-      const res = await API.graphql(graphqlOperation(listUsersWithFleets));
-      //console.log('fetchUserFleets res', res);
-      //@ts-ignore
-      if(res.data !== undefined){
-
-        res.data.listUsers.items.sort((a,b) => {
-          if(a.id === cognitoUser.attributes.sub && b.id !== cognitoUser.attributes.sub){
-            return -1;
-          }
-          if(a.id !== cognitoUser.attributes.sub && b.id === cognitoUser.attributes.sub){
-            return 1;
-          }
-
-          return 0;
-        });
-
-        console.log('UserFleetList res.data.listUsers sorted', res.data.listUsers);
-
-        //@ts-ignore
-        const usersWithFleets = res.data.listUsers.items.filter(
-          (item: IUser) => item.fleets.items.length > 0 || item.id === cognitoUser.attributes.sub
-        );
-
-
-
-
-        setUsersWithFleets(usersWithFleets);
-      }
-    };
-
-
-    fetchUserFleets();
+    fetchFleets();
+    //console.log("useEffect fleets", fleets);
   }, []);
 
   return (
     <View style={styles.container}>
-
       <FlatList
         horizontal
-        data={usersWithFleets}
+        data={fleets}
         renderItem={({item, index}) => (
           <UserFleetPreview
             index={index}
-            user={item}
-            usersWithFleets={usersWithFleets}/>
+            fleet={item[0]}
+            fleets={item}/>
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item[0].user.id}
         style={styles.flatlist}
         showsHorizontalScrollIndicator={false}
       />

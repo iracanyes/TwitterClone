@@ -196,16 +196,6 @@ const NewTweetScreen = () => {
             <MaterialCommunityIcons name={'map-marker-radius'} size={24} color={Colors.light.tint} />
             <MaterialCommunityIcons name={'vector-circle-variant'} size={24} color={Colors.light.tint} />
             <Ionicons name={'add-circle'} size={24} color={Colors.light.tint} />
-
-          </View>
-          <View style={styles.footerIconContainer}>
-            <AntDesign name={'picture'} size={24} color={Colors.light.tint} />
-            <MaterialCommunityIcons name={'gif'} size={24} color={Colors.light.tint} />
-            <Ionicons name={'md-stats-chart-sharp'} size={24} color={Colors.light.tint} />
-            <MaterialCommunityIcons name={'map-marker-radius'} size={24} color={Colors.light.tint} />
-            <MaterialCommunityIcons name={'vector-circle-variant'} size={24} color={Colors.light.tint} />
-            <Ionicons name={'add-circle'} size={24} color={Colors.light.tint} />
-
           </View>
         </View>
       </View>

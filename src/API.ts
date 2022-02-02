@@ -78,6 +78,7 @@ export type User = {
   likes?: ModelLikeConnection | null,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type ModelTweetConnection = {
@@ -96,6 +97,7 @@ export type Tweet = {
   likes?: ModelLikeConnection | null,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type ModelLikeConnection = {
@@ -113,6 +115,7 @@ export type Like = {
   tweet: Tweet,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type ModelFleetConnection = {
@@ -131,6 +134,7 @@ export type Fleet = {
   user?: User | null,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type UpdateUserInput = {
@@ -323,6 +327,7 @@ export type CreateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -337,6 +342,7 @@ export type CreateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -349,11 +355,13 @@ export type CreateUserMutation = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -382,6 +390,7 @@ export type UpdateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -396,6 +405,7 @@ export type UpdateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -408,11 +418,13 @@ export type UpdateUserMutation = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -441,6 +453,7 @@ export type DeleteUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -455,6 +468,7 @@ export type DeleteUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -467,11 +481,13 @@ export type DeleteUserMutation = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -510,6 +526,7 @@ export type CreateTweetMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
@@ -520,11 +537,13 @@ export type CreateTweetMutation = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -563,6 +582,7 @@ export type UpdateTweetMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
@@ -573,11 +593,13 @@ export type UpdateTweetMutation = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -616,6 +638,7 @@ export type DeleteTweetMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
@@ -626,11 +649,13 @@ export type DeleteTweetMutation = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -670,9 +695,11 @@ export type CreateFleetMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -712,9 +739,11 @@ export type UpdateFleetMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -754,9 +783,11 @@ export type DeleteFleetMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -794,6 +825,7 @@ export type CreateLikeMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     tweet:  {
       __typename: "Tweet",
@@ -812,6 +844,7 @@ export type CreateLikeMutation = {
         image?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
@@ -819,9 +852,11 @@ export type CreateLikeMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -859,6 +894,7 @@ export type UpdateLikeMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     tweet:  {
       __typename: "Tweet",
@@ -877,6 +913,7 @@ export type UpdateLikeMutation = {
         image?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
@@ -884,9 +921,11 @@ export type UpdateLikeMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -924,6 +963,7 @@ export type DeleteLikeMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     tweet:  {
       __typename: "Tweet",
@@ -942,6 +982,7 @@ export type DeleteLikeMutation = {
         image?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
@@ -949,9 +990,11 @@ export type DeleteLikeMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -979,6 +1022,7 @@ export type GetUserQuery = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -993,6 +1037,7 @@ export type GetUserQuery = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1005,11 +1050,13 @@ export type GetUserQuery = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1047,6 +1094,7 @@ export type ListUsersQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1086,6 +1134,7 @@ export type GetTweetQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
@@ -1096,11 +1145,13 @@ export type GetTweetQuery = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1132,6 +1183,7 @@ export type ListTweetsQuery = {
         image?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
@@ -1139,6 +1191,49 @@ export type ListTweetsQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type TweetsByDateQueryVariables = {
+  createdAt?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelTweetFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type TweetsByDateQuery = {
+  tweetsByDate?:  {
+    __typename: "ModelTweetConnection",
+    items:  Array< {
+      __typename: "Tweet",
+      id: string,
+      content: string,
+      image?: string | null,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        username: string,
+        name?: string | null,
+        email: string,
+        accountType?: string | null,
+        status?: string | null,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1179,9 +1274,11 @@ export type GetFleetQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1214,29 +1311,32 @@ export type ListFleetsQuery = {
         image?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
 };
 
-export type TweetsByDateQueryVariables = {
+export type FleetsByDateQueryVariables = {
   createdAt?: string | null,
   sortDirection?: ModelSortDirection | null,
-  filter?: ModelTweetFilterInput | null,
+  filter?: ModelFleetFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type TweetsByDateQuery = {
-  tweetsByDate?:  {
-    __typename: "ModelTweetConnection",
+export type FleetsByDateQuery = {
+  fleetsByDate?:  {
+    __typename: "ModelFleetConnection",
     items:  Array< {
-      __typename: "Tweet",
+      __typename: "Fleet",
       id: string,
-      content: string,
+      type: string,
+      text?: string | null,
       image?: string | null,
       userID: string,
       user?:  {
@@ -1250,16 +1350,18 @@ export type TweetsByDateQuery = {
         image?: string | null,
         createdAt: string,
         updatedAt: string,
-      } | null,
-      likes?:  {
-        __typename: "ModelLikeConnection",
-        nextToken?: string | null,
+        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
+};
+
+export type OnCreateUserSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateUserSubscription = {
@@ -1282,6 +1384,7 @@ export type OnCreateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1296,6 +1399,7 @@ export type OnCreateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1308,12 +1412,18 @@ export type OnCreateUserSubscription = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateUserSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateUserSubscription = {
@@ -1336,6 +1446,7 @@ export type OnUpdateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1350,6 +1461,7 @@ export type OnUpdateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1362,12 +1474,18 @@ export type OnUpdateUserSubscription = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteUserSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteUserSubscription = {
@@ -1390,6 +1508,7 @@ export type OnDeleteUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1404,6 +1523,7 @@ export type OnDeleteUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1416,12 +1536,18 @@ export type OnDeleteUserSubscription = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnCreateTweetSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateTweetSubscription = {
@@ -1454,6 +1580,7 @@ export type OnCreateTweetSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
@@ -1464,12 +1591,18 @@ export type OnCreateTweetSubscription = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateTweetSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateTweetSubscription = {
@@ -1502,6 +1635,7 @@ export type OnUpdateTweetSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
@@ -1512,12 +1646,18 @@ export type OnUpdateTweetSubscription = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteTweetSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteTweetSubscription = {
@@ -1550,6 +1690,7 @@ export type OnDeleteTweetSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     likes?:  {
       __typename: "ModelLikeConnection",
@@ -1560,12 +1701,18 @@ export type OnDeleteTweetSubscription = {
         tweetID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnCreateFleetSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateFleetSubscription = {
@@ -1599,10 +1746,16 @@ export type OnCreateFleetSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateFleetSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateFleetSubscription = {
@@ -1636,10 +1789,16 @@ export type OnUpdateFleetSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteFleetSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteFleetSubscription = {
@@ -1673,10 +1832,16 @@ export type OnDeleteFleetSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnCreateLikeSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateLikeSubscription = {
@@ -1708,6 +1873,7 @@ export type OnCreateLikeSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     tweet:  {
       __typename: "Tweet",
@@ -1726,6 +1892,7 @@ export type OnCreateLikeSubscription = {
         image?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
@@ -1733,10 +1900,16 @@ export type OnCreateLikeSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateLikeSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateLikeSubscription = {
@@ -1768,6 +1941,7 @@ export type OnUpdateLikeSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     tweet:  {
       __typename: "Tweet",
@@ -1786,6 +1960,7 @@ export type OnUpdateLikeSubscription = {
         image?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
@@ -1793,10 +1968,16 @@ export type OnUpdateLikeSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteLikeSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteLikeSubscription = {
@@ -1828,6 +2009,7 @@ export type OnDeleteLikeSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     tweet:  {
       __typename: "Tweet",
@@ -1846,6 +2028,7 @@ export type OnDeleteLikeSubscription = {
         image?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
@@ -1853,8 +2036,10 @@ export type OnDeleteLikeSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };

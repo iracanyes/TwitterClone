@@ -26,6 +26,7 @@ import {View} from "react-native";
 import {API, Auth, graphqlOperation} from "aws-amplify";
 import { getUser } from "../graphql/queries";
 import {IUser} from "../types/interfaces";
+import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -97,7 +98,11 @@ function HomeNavigator() {
 
         // Get User info in DB
         if(cognitoUser){
-          const response = await API.graphql(graphqlOperation(getUser, { id: cognitoUser.attributes.sub }));
+          const response = await API.graphql({
+            query: getUser,
+            variables: { id: cognitoUser.attributes.sub },
+            authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+          });
 
           // @ts-ignore
           if(response.data.getUser){
@@ -122,41 +127,7 @@ function HomeNavigator() {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          headerTitle: () => (
-            <Ionicons
-              name={"logo-twitter"}
-              size={30}
-              color={Colors.light.tint}
-              style={{
-                textAlign: "center"
-              }}
-            />
-          ),
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name={"star-four-points-outline"}
-              size={30}
-              color={Colors.light.tint}
-            />
-          ),
-          headerRightContainerStyle: {
-            marginRight: 15
-          },
-          headerLeft: () => {
-            //const { image } = user;
-            return (
-              <ProfilePicture
-                image={user !== null ? user.image : "http://placeimg.com/640/360/any" }
-                size={50}
-                onPress={() => navigation.navigate('Profile', {screen: 'Profile'})}
-              />
-            )
-          },
-          headerLeftContainerStyle: {
-            marginLeft: 10,
-            paddingBottom: 10
-          },
-
+          header: () => null,
         }}
       />
     </HomeStack.Navigator>

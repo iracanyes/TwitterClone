@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+  subscription OnCreateUser($owner: String) {
+    onCreateUser(owner: $owner) {
       id
       username
       name
@@ -20,6 +20,7 @@ export const onCreateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -32,6 +33,7 @@ export const onCreateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -42,17 +44,19 @@ export const onCreateUser = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+  subscription OnUpdateUser($owner: String) {
+    onUpdateUser(owner: $owner) {
       id
       username
       name
@@ -68,6 +72,7 @@ export const onUpdateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -80,6 +85,7 @@ export const onUpdateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -90,17 +96,19 @@ export const onUpdateUser = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+  subscription OnDeleteUser($owner: String) {
+    onDeleteUser(owner: $owner) {
       id
       username
       name
@@ -116,6 +124,7 @@ export const onDeleteUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -128,6 +137,7 @@ export const onDeleteUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -138,17 +148,19 @@ export const onDeleteUser = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateTweet = /* GraphQL */ `
-  subscription OnCreateTweet {
-    onCreateTweet {
+  subscription OnCreateTweet($owner: String) {
+    onCreateTweet(owner: $owner) {
       id
       content
       image
@@ -172,6 +184,7 @@ export const onCreateTweet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       likes {
         items {
@@ -180,17 +193,19 @@ export const onCreateTweet = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateTweet = /* GraphQL */ `
-  subscription OnUpdateTweet {
-    onUpdateTweet {
+  subscription OnUpdateTweet($owner: String) {
+    onUpdateTweet(owner: $owner) {
       id
       content
       image
@@ -214,6 +229,7 @@ export const onUpdateTweet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       likes {
         items {
@@ -222,17 +238,19 @@ export const onUpdateTweet = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteTweet = /* GraphQL */ `
-  subscription OnDeleteTweet {
-    onDeleteTweet {
+  subscription OnDeleteTweet($owner: String) {
+    onDeleteTweet(owner: $owner) {
       id
       content
       image
@@ -256,6 +274,7 @@ export const onDeleteTweet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       likes {
         items {
@@ -264,17 +283,19 @@ export const onDeleteTweet = /* GraphQL */ `
           tweetID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateFleet = /* GraphQL */ `
-  subscription OnCreateFleet {
-    onCreateFleet {
+  subscription OnCreateFleet($owner: String) {
+    onCreateFleet(owner: $owner) {
       id
       type
       text
@@ -299,15 +320,17 @@ export const onCreateFleet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateFleet = /* GraphQL */ `
-  subscription OnUpdateFleet {
-    onUpdateFleet {
+  subscription OnUpdateFleet($owner: String) {
+    onUpdateFleet(owner: $owner) {
       id
       type
       text
@@ -332,15 +355,17 @@ export const onUpdateFleet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteFleet = /* GraphQL */ `
-  subscription OnDeleteFleet {
-    onDeleteFleet {
+  subscription OnDeleteFleet($owner: String) {
+    onDeleteFleet(owner: $owner) {
       id
       type
       text
@@ -365,15 +390,17 @@ export const onDeleteFleet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateLike = /* GraphQL */ `
-  subscription OnCreateLike {
-    onCreateLike {
+  subscription OnCreateLike($owner: String) {
+    onCreateLike(owner: $owner) {
       id
       userID
       tweetID
@@ -396,6 +423,7 @@ export const onCreateLike = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       tweet {
         id
@@ -412,21 +440,24 @@ export const onCreateLike = /* GraphQL */ `
           image
           createdAt
           updatedAt
+          owner
         }
         likes {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateLike = /* GraphQL */ `
-  subscription OnUpdateLike {
-    onUpdateLike {
+  subscription OnUpdateLike($owner: String) {
+    onUpdateLike(owner: $owner) {
       id
       userID
       tweetID
@@ -449,6 +480,7 @@ export const onUpdateLike = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       tweet {
         id
@@ -465,21 +497,24 @@ export const onUpdateLike = /* GraphQL */ `
           image
           createdAt
           updatedAt
+          owner
         }
         likes {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteLike = /* GraphQL */ `
-  subscription OnDeleteLike {
-    onDeleteLike {
+  subscription OnDeleteLike($owner: String) {
+    onDeleteLike(owner: $owner) {
       id
       userID
       tweetID
@@ -502,6 +537,7 @@ export const onDeleteLike = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       tweet {
         id
@@ -518,15 +554,18 @@ export const onDeleteLike = /* GraphQL */ `
           image
           createdAt
           updatedAt
+          owner
         }
         likes {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;

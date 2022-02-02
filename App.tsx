@@ -9,22 +9,24 @@ import Navigation from './navigation';
 // @ts-ignore
 import Amplify, {Auth, API, Hub, graphqlOperation} from "aws-amplify";
 import awsconfig from './src/aws-exports';
-import { withOAuth } from "aws-amplify-react-native";
 import {
-  View,
-  Text,
-  Button,
+  Platform,
   StyleSheet,
-  TouchableOpacity
 } from "react-native";
 import { Entypo, AntDesign, Fontisto } from "@expo/vector-icons";
+import { AppProps } from "./types";
+
 // react-native-root-toast wrapper
 import {RootSiblingParent} from "react-native-root-siblings";
+import Colors from "./constants/Colors";
 
 Amplify.configure(awsconfig);
 
-type AppProps = { oAuthUser: any; oAuthError: any; hostedUISignIn: any; facebookSignIn: any; googleSignIn: any; amazonSignIn: any; };
-
+/**
+ *
+ * @param props
+ * @constructor
+ */
 function App(props: AppProps) {
   const {
     oAuthUser,
@@ -46,10 +48,10 @@ function App(props: AppProps) {
           case 'signIn':
           case 'cognitoHostedUI':
             const user = getUser();
-            console.log("App Hub listen - Auth event", event);
-            console.log("App Hub listen - Auth data", data);
-            console.log("App Hub listen - oAuthUser", oAuthUser);
-            console.log("App Hub listen - currentAuthenticatedUser", user);
+            //console.log("App Hub listen - Auth event", event);
+            //console.log("App Hub listen - Auth data", data);
+            //console.log("App Hub listen - oAuthUser", oAuthUser);
+            //console.log("App Hub listen - currentAuthenticatedUser", user);
             setUser(data);
             break;
           case 'signOut':
@@ -83,8 +85,8 @@ function App(props: AppProps) {
         {/*user ?? console.log('App return User', user)*/}
         <SafeAreaView style={styles.container}>
           <RootSiblingParent>
+            <StatusBar backgroundColor={Colors.light.tint}/>
             <Navigation colorScheme={colorScheme} />
-            <StatusBar />
           </RootSiblingParent>
         </SafeAreaView>
       </SafeAreaProvider>

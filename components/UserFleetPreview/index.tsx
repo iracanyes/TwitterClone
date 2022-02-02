@@ -11,24 +11,32 @@ import styles from "./styles";
 import ProfilePicture from "../ProfilePicture";
 import {UserFleetPreviewProps} from "../../types";
 
-const UserFleetPreview = (props: UserFleetPreviewProps) => {
-  const { index, user, usersWithFleets  } = props;
+const UserFleetPreview = (props /*: UserFleetPreviewProps*/) => {
+  const { index, fleet, fleets  } = props;
   const navigation = useNavigation();
+
+  useEffect(() => {
+
+    console.log("UserFleetPreview index", index);
+
+    console.log("UserFleetPreview fleet", fleet);
+    console.log("UserFleetPreview fleets", fleets);
+  }, []);
 
   return (
     <View style={styles.container}>
       <ProfilePicture
-        image={ props.user.image }
+        image={ fleet.user ? fleet.user.image : null }
         size={60} styles={styles}
         onPress={() => {
           if(index === 0){
-            navigation.navigate('NewFleet', { userID: user.id });
+            navigation.navigate('NewFleet', { userID: fleet.user.id });
           }else{
             navigation.navigate(
               'Fleet',
               {
-                userID: user.id,
-                usersWithFleets
+                userID: fleet.user.id,
+                fleets
               }
             )
           }
@@ -42,7 +50,7 @@ const UserFleetPreview = (props: UserFleetPreviewProps) => {
         )
         : (
           <Text style={styles.username}>
-            { user.fleets.items.length }
+            { fleets ? fleets.length : "" }
           </Text>
         )
       }

@@ -36,8 +36,8 @@
     "sharedId": "92f6727f",
     "resourceName": "twitterclone92f6727f",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "defaultSocial",
-    "hostedUI": true,
+    "useDefault": "default",
+    "hostedUI": false,
     "usernameAttributes": [
       "email"
     ],
@@ -59,13 +59,6 @@
     },
     "breakCircularDependency": true,
     "dependsOn": [],
-    "hostedUIDomainName": "twitterclonec2414ffd-c2414ffd",
-    "authProvidersUserPool": [
-      "Facebook",
-      "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:19000/\"],\"LogoutURLs\":[\"http://localhost:19000/\"]}",
     "authProviders": []
   }
 }
